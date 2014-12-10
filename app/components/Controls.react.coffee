@@ -38,8 +38,8 @@ module.exports = React.createClass
     @setState(stateFromSessionStore())
 
   leaveRoom: (event)->
-    event.preventDefault()
     SessionActionCreators.leaveRoom(@state.currentRoom)
+    event.preventDefault()
 
   render: ->
     if @state.joiningRoom

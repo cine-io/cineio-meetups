@@ -31,7 +31,8 @@ PeerStore = assign {}, EventEmitter::,
   getOtherVideos: ->
     otherVideos = []
     mainVideo = PeerStore.getMainVideo()
-    otherVideos.push peer unless peer == mainVideo for peer in _peers
+    for peer in _peers
+      otherVideos.push peer unless peer == mainVideo
 
 
     otherVideos.push _myVideo unless _myVideo == mainVideo
