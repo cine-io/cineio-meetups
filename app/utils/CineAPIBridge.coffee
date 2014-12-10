@@ -8,6 +8,12 @@ CineAPIBridge =
   leaveRoom: (name)->
     CineIOPeer.leave(name)
 
+  mute: ->
+    CineIOPeer.stopMicrophone()
+
+  unmute: ->
+    CineIOPeer.startMicrophone()
+
   init: ->
     CineIOPeer.on 'mediaRejected', (data)->
       alert('Permission denied.')

@@ -6,7 +6,7 @@ SessionStore = require('../stores/SessionStore')
 SessionActionCreators = require('../actions/SessionActionCreators')
 
 stateFromSessionStore = ->
-  return {currentRoom: SessionStore.getCurrentRoom()}
+  return {currentRoom: SessionStore.getCurrentRoom(), muted: SessionStore.muted()}
 
 module.exports = React.createClass
 
@@ -19,6 +19,14 @@ module.exports = React.createClass
 
   exitJoinRoom: ->
     @setState(joiningRoom: false)
+
+  mute: (event)->
+    event.preventDefault()
+    SessionActionCreators.mute()
+
+  unmute: (event)->
+    event.preventDefault()
+    SessionActionCreators.unmute()
 
   componentDidMount: ->
     SessionStore.addChangeListener(this._onChange)
@@ -37,6 +45,10 @@ module.exports = React.createClass
     if @state.joiningRoom
       view = (<JoinRoom callback={@exitJoinRoom}/>)
     else
+      if @state.muted
+        muteButton = (<button onClick={@unmute}>Unmute</button>)
+      else
+        muteButton = (<button onClick={@mute}>Mute</button>)
       if @state.currentRoom
         roomButton = (<button onClick={@leaveRoom}>Leave {@state.currentRoom}</button>)
       else
@@ -44,7 +56,7 @@ module.exports = React.createClass
       view = (
         <ul>
           <li>
-            <button>Mute</button>
+            {muteButton}
           </li>
           <li>
             <button>Call Somebody</button>

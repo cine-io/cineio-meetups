@@ -11,6 +11,7 @@ CHANGE_EVENT = "change"
 
 _room = null
 _identity = null
+_muted = false
 
 SessionStore = assign {}, EventEmitter::,
   emitChange: ->
@@ -35,6 +36,8 @@ SessionStore = assign {}, EventEmitter::,
 
   getIdentity: ->
     _identity
+  muted: ->
+    _muted
 
 console.log("SETTING DISPATCHER")
 SessionStore.dispatchToken = AppDispatcher.register((payload) ->
@@ -49,6 +52,14 @@ SessionStore.dispatchToken = AppDispatcher.register((payload) ->
     when ActionTypes.LEAVE_ROOM
       console.log("LEAVING room", action.room)
       _room = null
+      # AppDispatcher.waitFor [SessionStore.dispatchToken]
+      SessionStore.emitChange()
+    when ActionTypes.MUTE
+      _muted = true
+      # AppDispatcher.waitFor [SessionStore.dispatchToken]
+      SessionStore.emitChange()
+    when ActionTypes.UNMUTE
+      _muted = false
       # AppDispatcher.waitFor [SessionStore.dispatchToken]
       SessionStore.emitChange()
     else

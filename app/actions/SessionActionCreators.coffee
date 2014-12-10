@@ -17,4 +17,14 @@ SessionActionCreators =
       room: room
     CineAPIBridge.leaveRoom(room)
 
+  mute: ->
+    AppDispatcher.handleViewAction
+      type: ActionTypes.MUTE
+    CineAPIBridge.mute()
+
+  unmute: ->
+    AppDispatcher.handleViewAction
+      type: ActionTypes.UNMUTE
+    CineAPIBridge.unmute()
+
 module.exports = SessionActionCreators

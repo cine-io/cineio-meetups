@@ -6,6 +6,8 @@ module.exports =
     JOIN_ROOM: null
     NEW_PEER: null
     PEER_LEFT: null
+    MUTE: null
+    UNMUTE: null
     LOCAL_WEBCAM_STARTED: null
   PayloadSources: keyMirror
     CINE_ACTION: null
