@@ -52,9 +52,6 @@ else
   app.get '', (req, res)->
     res.render('not_configured', {title: 'Not Configured'})
 
-# serve static files
-app.use express.static(__dirname + "/public")
-
 if process.env.NODE_ENV == 'development'
   browserify  = require("connect-browserify")
   nodejsx     = require("node-cjsx").transform()
@@ -65,6 +62,9 @@ if process.env.NODE_ENV == 'development'
     transforms: ["coffee-reactify"]
     extensions: [".cjsx", ".coffee", ".js", ".json"]
   )
+
+# serve static files
+app.use express.static(__dirname + "/public")
 
 httpServer.listen port, ->
   console.log "HTTP server started at http://localhost.cine.io:#{port}"
