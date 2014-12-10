@@ -8,6 +8,12 @@ CineAPIBridge =
   leaveRoom: (name)->
     CineIOPeer.leave(name)
 
+  identify: (data)->
+    CineIOPeer.identify(data.identity, data.timestamp, data.signature)
+
+  call: (identity)->
+    CineIOPeer.call(identity)
+
   mute: ->
     CineIOPeer.stopMicrophone()
 
@@ -25,7 +31,8 @@ CineAPIBridge =
         alert(err.msg)
 
     CineIOPeer.on 'call', (data)->
-      console.log("NEW CALL")
+      console.log("NEW CALL", data)
+      CineActionCreators.newCall(data.call)
       # data.call.answer()
 
     CineIOPeer.on 'mediaAdded', (data)->

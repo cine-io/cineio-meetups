@@ -17,6 +17,11 @@ module.exports =
       type: ActionTypes.NEW_PEER
       video: video
 
+  newCall: (call)->
+    AppDispatcher.handleCineAction
+      type: ActionTypes.INCOMING_CALL
+      call: call
+
   peerLeft: (video)->
     AppDispatcher.handleCineAction
       type: ActionTypes.PEER_LEFT

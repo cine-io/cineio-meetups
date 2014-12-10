@@ -3,6 +3,11 @@ keyMirror = require('keymirror')
 module.exports =
   ActionTypes: keyMirror
     SET_IDENTITY: null
+    CALL: null
+    INCOMING_CALL: null
+    CALL_ANSWERED: null
+    CALL_REJECTED: null
+    CALL_HANGUP: null
     JOIN_ROOM: null
     NEW_PEER: null
     PEER_LEFT: null

@@ -36,6 +36,7 @@ SessionStore = assign {}, EventEmitter::,
 
   getIdentity: ->
     _identity
+
   muted: ->
     _muted
 
@@ -52,6 +53,11 @@ SessionStore.dispatchToken = AppDispatcher.register((payload) ->
     when ActionTypes.LEAVE_ROOM
       console.log("LEAVING room", action.room)
       _room = null
+      # AppDispatcher.waitFor [SessionStore.dispatchToken]
+      SessionStore.emitChange()
+    when ActionTypes.SET_IDENTITY
+      console.log("LEAVING room", action.room)
+      _identity = action.identity
       # AppDispatcher.waitFor [SessionStore.dispatchToken]
       SessionStore.emitChange()
     when ActionTypes.MUTE
