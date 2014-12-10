@@ -23,6 +23,14 @@ SessionActionCreators =
       identity: identity
     CineAPIBridge.call(identity)
 
+  invite: (identity, options)->
+    AppDispatcher.handleViewAction
+      type: ActionTypes.INVITE
+      identity: identity
+      room: options.room
+      call: options.call
+    CineAPIBridge.call(identity, room: options.room, call: options.call)
+
   callAnswered: (call)->
     AppDispatcher.handleViewAction
       type: ActionTypes.CALL_ANSWERED

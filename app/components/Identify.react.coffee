@@ -27,7 +27,7 @@ module.exports = React.createClass
 
   render: ->
     return (
-      <div className="controls">
+      <div className="identify">
         <form onSubmit={@_onSubmit}>
           <input ref="myTextInput" type='text' onKeyDown={@_onChange}/>
         </form>

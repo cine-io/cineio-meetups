@@ -9,6 +9,7 @@ module.exports =
     CALL_REJECTED: null
     INCOMING_CALL_REJECTED: null
     CALL_HANGUP: null
+    INVITE: null
     OUTGOING_CALL: null
     JOIN_ROOM: null
     NEW_PEER: null

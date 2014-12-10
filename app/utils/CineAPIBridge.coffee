@@ -11,8 +11,14 @@ CineAPIBridge =
   identify: (data)->
     CineIOPeer.identify(data.identity, data.timestamp, data.signature)
 
-  call: (identity)->
-    CineIOPeer.call(identity)
+  call: (identity, options={})->
+    if options.call
+      options.call.invite(identity)
+    else if options.room
+      CineIOPeer.call(identity, options.room)
+    # unnecessary else, but helpful verbosity
+    else
+      CineIOPeer.call(identity)
 
   mute: ->
     CineIOPeer.stopMicrophone()

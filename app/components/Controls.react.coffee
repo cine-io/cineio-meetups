@@ -48,19 +48,15 @@ module.exports = React.createClass
     SessionActionCreators.unmute()
 
   componentDidMount: ->
-    SessionStore.addChangeListener(this._onChange)
-    PeerStore.addChangeListener(this._onChange)
+    SessionStore.addChangeListener(@_onChange)
+    PeerStore.addChangeListener(@_onChange)
 
   componentWillUnmount: ->
-    SessionStore.removeChangeListener(this._onChange)
-    PeerStore.removeChangeListener(this._onChange)
+    SessionStore.removeChangeListener(@_onChange)
+    PeerStore.removeChangeListener(@_onChange)
 
   _onChange: ->
     @setState(stateFromSessionStore())
-
-  leaveRoom: (event)->
-    SessionActionCreators.leaveRoom(@state.currentRoom)
-    event.preventDefault()
 
   render: ->
     if @state.currentCall
@@ -68,6 +64,9 @@ module.exports = React.createClass
         view = (<OngoingCall call={@state.currentCall} />)
       else
         view = (<IncomingCall call={@state.currentCall} />)
+
+    else if @state.currentRoom
+      view = (<OngoingCall room={@state.currentRoom} />)
 
     else if @state.joiningRoom
       view = (<JoinRoom callback={@exitJoinRoom} />)
@@ -84,11 +83,6 @@ module.exports = React.createClass
       else
         muteButton = (<button onClick={@mute}>Mute</button>)
 
-      if @state.currentRoom
-        roomButton = (<button onClick={@leaveRoom}>Leave {@state.currentRoom}</button>)
-      else
-        roomButton = (<button onClick={@joinRoom}>Join Room</button>)
-
       if @state.identity
         callButton = (<button onClick={@call}>({@state.identity}) Call</button>)
       else
@@ -103,7 +97,7 @@ module.exports = React.createClass
             {callButton}
           </li>
           <li>
-            {roomButton}
+            <button onClick={@joinRoom}>Join Room</button>
           </li>
         </ul>
       )

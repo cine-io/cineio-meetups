@@ -18,7 +18,7 @@ module.exports = React.createClass
 
   render: ->
     return (
-      <ul>
+      <ul className='incoming-call'>
         <li>
           <button onClick={@answer}>Answer</button>
         </li>
