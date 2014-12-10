@@ -1,7 +1,7 @@
 # cine.io Google Hangouts clone
 
 ## running
-add a .env
+add a `.env` file
 
 ```
 CINE_IO_PUBLIC_KEY= cine.io production public key
@@ -12,7 +12,7 @@ SSL_PORT=9443
 NODE_ENV=development
 ```
 
-foreman run coffee server.coffee
+Start with: `foreman run coffee server.coffee`
 
 ## Running
 
