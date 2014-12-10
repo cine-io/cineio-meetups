@@ -3,7 +3,7 @@ EventEmitter = require("events").EventEmitter
 
 AppDispatcher = require("../dispatcher/AppDispatcher")
 MainConstants = require("../constants/MainConstants")
-
+{Howl} = require('howler')
 CHANGE_EVENT = "change"
 
 ActionTypes = MainConstants.ActionTypes
@@ -12,6 +12,17 @@ CHANGE_EVENT = "change"
 _peers = []
 _myVideo = null
 _currentCall = null
+_ringer = null
+
+startRing = ->
+  _ringer = new Howl
+    urls: ['/audio/ringer.ogg', '/audio/ringer.mp3']
+    autoplay: true
+    loop: true
+
+stopRing = ->
+  _ringer.stop()
+  _ringer = null
 
 PeerStore = assign {}, EventEmitter::,
   emitChange: ->
@@ -60,6 +71,7 @@ PeerStore.dispatchToken = AppDispatcher.register((payload) ->
       PeerStore.emitChange()
     when ActionTypes.INCOMING_CALL
       console.log("incoming call", action.call)
+      startRing()
       _currentCall = action.call
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()
@@ -73,10 +85,14 @@ PeerStore.dispatchToken = AppDispatcher.register((payload) ->
       _currentCall = null
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()
-    # when ActionTypes.CALL_ANSWERED
-    #   console.log("call answered", action.call)
-    #   # AppDispatcher.waitFor [PeerStore.dispatchToken]
-    #   PeerStore.emitChange()
+    when ActionTypes.CALL_ANSWER
+      console.log("call answered", action.call)
+      # AppDispatcher.waitFor [PeerStore.dispatchToken]
+      stopRing()
+    when ActionTypes.CALL_REJECT
+      stopRing()
+      _currentCall = null
+      PeerStore.emitChange()
     when ActionTypes.CALL_REJECTED
       console.log("call rejected", action.call)
       _currentCall = null

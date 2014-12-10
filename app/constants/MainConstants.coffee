@@ -6,7 +6,9 @@ module.exports =
     CALL: null
     INCOMING_CALL: null
     CALL_ANSWERED: null
+    CALL_ANSWER: null
     CALL_REJECTED: null
+    CALL_REJECT: null
     INCOMING_CALL_REJECTED: null
     CALL_HANGUP: null
     INVITE: null

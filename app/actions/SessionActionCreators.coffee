@@ -33,12 +33,12 @@ SessionActionCreators =
 
   callAnswered: (call)->
     AppDispatcher.handleViewAction
-      type: ActionTypes.CALL_ANSWERED
+      type: ActionTypes.CALL_ANSWER
       call: call
 
   callRejected: (call)->
     AppDispatcher.handleViewAction
-      type: ActionTypes.CALL_REJECTED
+      type: ActionTypes.CALL_REJECT
       call: call
 
   callHangup: (call)->

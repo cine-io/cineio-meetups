@@ -11,6 +11,7 @@
     "coffee-script": "^1.8.0",
     "express": "^4.10.4",
     "flux": "^2.0.1",
+    "howler": "^1.1.25",
     "jade": "^1.8.1",
     "keymirror": "^0.1.0",
     "lodash": "^2.4.1",
