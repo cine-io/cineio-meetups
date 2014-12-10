@@ -11,7 +11,7 @@ PeerStore = require('../stores/PeerStore')
 SessionActionCreators = require('../actions/SessionActionCreators')
 
 stateFromSessionStore = ->
-  return {incomingCall: PeerStore.getIncomingCall(), currentRoom: SessionStore.getCurrentRoom(), muted: SessionStore.muted(), identity: SessionStore.getIdentity()}
+  return {currentCall: PeerStore.getCurrentCall(), currentRoom: SessionStore.getCurrentRoom(), muted: SessionStore.muted(), identity: SessionStore.getIdentity()}
 
 module.exports = React.createClass
 
@@ -63,17 +63,21 @@ module.exports = React.createClass
     event.preventDefault()
 
   render: ->
-    if @state.incomingCall
-      if @state.incomingCall.ongoing
-        view = (<OngoingCall call={@state.incomingCall} />)
+    if @state.currentCall
+      if @state.currentCall.ongoing
+        view = (<OngoingCall call={@state.currentCall} />)
       else
-        view = (<IncomingCall call={@state.incomingCall} />)
+        view = (<IncomingCall call={@state.currentCall} />)
+
     else if @state.joiningRoom
       view = (<JoinRoom callback={@exitJoinRoom} />)
+
     else if @state.identifying
       view = (<Identify callback={@exitIdentify} />)
+
     else if @state.calling
       view = (<Call callback={@exitCall} />)
+
     else
       if @state.muted
         muteButton = (<button onClick={@unmute}>Unmute</button>)
@@ -89,6 +93,7 @@ module.exports = React.createClass
         callButton = (<button onClick={@call}>({@state.identity}) Call</button>)
       else
         callButton = (<button onClick={@identify}>Identify</button>)
+
       view = (
         <ul>
           <li>

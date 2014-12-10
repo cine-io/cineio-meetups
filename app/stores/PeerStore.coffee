@@ -11,7 +11,7 @@ CHANGE_EVENT = "change"
 
 _peers = []
 _myVideo = null
-_incomingCall = null
+_currentCall = null
 
 PeerStore = assign {}, EventEmitter::,
   emitChange: ->
@@ -26,8 +26,8 @@ PeerStore = assign {}, EventEmitter::,
   removeChangeListener: (callback) ->
     @removeListener CHANGE_EVENT, callback
 
-  getIncomingCall: ->
-    _incomingCall
+  getCurrentCall: ->
+    _currentCall
 
   getOtherVideos: ->
     otherVideos = []
@@ -60,12 +60,17 @@ PeerStore.dispatchToken = AppDispatcher.register((payload) ->
       PeerStore.emitChange()
     when ActionTypes.INCOMING_CALL
       console.log("incoming call", action.call)
-      _incomingCall = action.call
+      _currentCall = action.call
+      # AppDispatcher.waitFor [PeerStore.dispatchToken]
+      PeerStore.emitChange()
+    when ActionTypes.OUTGOING_CALL
+      console.log("incoming call", action.call)
+      _currentCall = action.call
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()
     when ActionTypes.CALL_HANGUP
       console.log("hung up", action.call)
-      _incomingCall = null
+      _currentCall = null
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()
     # when ActionTypes.CALL_ANSWERED
@@ -74,13 +79,14 @@ PeerStore.dispatchToken = AppDispatcher.register((payload) ->
     #   PeerStore.emitChange()
     when ActionTypes.CALL_REJECTED
       console.log("call rejected", action.call)
-      _incomingCall = null
+      _currentCall = null
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()
     when ActionTypes.PEER_LEFT
       console.log("removing Peer", action.video)
       index = _peers.indexOf action.video
       _peers.splice index, 1
+      _currentCall = null if _peers.length == 0
       # _peers.push action.video
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()

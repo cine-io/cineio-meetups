@@ -33,6 +33,14 @@ CineAPIBridge =
     CineIOPeer.on 'call', (data)->
       console.log("NEW CALL", data)
       CineActionCreators.newCall(data.call)
+
+    CineIOPeer.on 'call-placed', (data)->
+      console.log("CURRENT CALL", data)
+      CineActionCreators.currentCall(data.call)
+
+    CineIOPeer.on 'call-reject', (data)->
+      console.log("CURRENT CALL", data)
+      CineActionCreators.callRejected(data.call)
       # data.call.answer()
 
     CineIOPeer.on 'mediaAdded', (data)->

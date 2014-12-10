@@ -22,6 +22,16 @@ module.exports =
       type: ActionTypes.INCOMING_CALL
       call: call
 
+  currentCall: (call)->
+    AppDispatcher.handleCineAction
+      type: ActionTypes.OUTGOING_CALL
+      call: call
+
+  callRejected: (call)->
+    AppDispatcher.handleCineAction
+      type: ActionTypes.CALL_REJECTED
+      call: call
+
   peerLeft: (video)->
     AppDispatcher.handleCineAction
       type: ActionTypes.PEER_LEFT

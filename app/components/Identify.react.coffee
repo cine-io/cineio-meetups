@@ -16,18 +16,20 @@ module.exports = React.createClass
   _onSubmit: (event)->
     event.preventDefault();
     console.log("submitting")
-    SessionActionCreators.identify(this.state.text.trim())
+    text = @state.text.trim()
+    if text != ''
+      SessionActionCreators.identify(text)
     @setState(@getInitialState())
     @props.callback()
 
   componentDidMount: ->
-    this.refs.myTextInput.getDOMNode().focus()
+    @refs.myTextInput.getDOMNode().focus()
 
   render: ->
     return (
       <div className="controls">
-        <form onSubmit={this._onSubmit}>
-          <input ref="myTextInput" type='text' onKeyDown={this._onChange}/>
+        <form onSubmit={@_onSubmit}>
+          <input ref="myTextInput" type='text' onKeyDown={@_onChange}/>
         </form>
       </div>
     )
