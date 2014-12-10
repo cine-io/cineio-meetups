@@ -4,6 +4,8 @@ SessionActionCreators = require('../actions/SessionActionCreators')
 SessionStore = require('../stores/SessionStore')
 assign = require("object-assign")
 
+ESCAPE_KEY = 27
+
 stateFromSessionStore = ->
   return {muted: SessionStore.muted()}
 
@@ -25,7 +27,10 @@ module.exports = React.createClass
     @setState(stateFromSessionStore())
 
   _onKeyDown: (event)->
-    @setState({inviteName: event.target.value})
+    if event.keyCode == ESCAPE_KEY
+      @_resetInvite()
+    else
+      @setState({inviteName: event.target.value})
 
   _onSubmit: (event)->
     event.preventDefault();
@@ -33,6 +38,9 @@ module.exports = React.createClass
     text = @state.inviteName.trim()
     if text != ''
       SessionActionCreators.invite(text, call: @props.call, room: @props.room)
+    @_resetInvite()
+
+  _resetInvite: ->
     @setState(inviting: false, inviteName: '')
 
   hangup: (event)->

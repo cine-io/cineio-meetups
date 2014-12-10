@@ -17,7 +17,6 @@ module.exports = React.createClass
       @_done()
     else
       @setState({text: event.target.value})
-    @setState({text: event.target.value})
 
   _onSubmit: (event)->
     event.preventDefault();
