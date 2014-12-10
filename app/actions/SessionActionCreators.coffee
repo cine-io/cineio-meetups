@@ -31,12 +31,12 @@ SessionActionCreators =
       call: options.call
     CineAPIBridge.call(identity, room: options.room, call: options.call)
 
-  callAnswered: (call)->
+  answerCall: (call)->
     AppDispatcher.handleViewAction
       type: ActionTypes.CALL_ANSWER
       call: call
 
-  callRejected: (call)->
+  rejectCall: (call)->
     AppDispatcher.handleViewAction
       type: ActionTypes.CALL_REJECT
       call: call

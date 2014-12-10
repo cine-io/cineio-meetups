@@ -9,12 +9,12 @@ module.exports = React.createClass
   answer: (event)->
     event.preventDefault()
     @props.call.answer()
-    SessionActionCreators.callAnswered(@props.call)
+    SessionActionCreators.answerCall(@props.call)
 
   reject: (event)->
     event.preventDefault()
     @props.call.reject()
-    SessionActionCreators.callRejected(@props.call)
+    SessionActionCreators.rejectCall(@props.call)
 
   render: ->
     return (
