@@ -3,6 +3,8 @@
 React = require('react')
 SessionActionCreators = require('../actions/SessionActionCreators')
 
+ESCAPE_KEY = 27
+
 module.exports = React.createClass
   propTypes:
     callback: React.PropTypes.func.isRequired
@@ -11,7 +13,10 @@ module.exports = React.createClass
     return {text: ''}
 
   _onChange: (event)->
-    @setState({text: event.target.value})
+    if event.keyCode == ESCAPE_KEY
+      @_done()
+    else
+      @setState({text: event.target.value})
 
   _onSubmit: (event)->
     event.preventDefault();
@@ -19,6 +24,9 @@ module.exports = React.createClass
     text = @state.text.trim()
     if text != ''
       SessionActionCreators.call(text)
+    @_done()
+
+  _done: ->
     @setState(@getInitialState())
     @props.callback()
 
