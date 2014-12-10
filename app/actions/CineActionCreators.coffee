@@ -12,6 +12,11 @@ module.exports =
       type: ActionTypes.LOCAL_WEBCAM_STARTED
       video: video
 
+  localWebcamRemoved: (video)->
+    AppDispatcher.handleCineAction
+      type: ActionTypes.LOCAL_WEBCAM_REMOVED
+      video: video
+
   newPeer: (video)->
     AppDispatcher.handleCineAction
       type: ActionTypes.NEW_PEER

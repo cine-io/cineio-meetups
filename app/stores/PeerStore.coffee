@@ -51,7 +51,6 @@ PeerStore = assign {}, EventEmitter::,
     otherVideos
 
   getMainVideo: ->
-    console.log("Running", _myVideo)
     return _myVideo if _peers.length == 0
     # FANCY MAGIC ON WHO'S TALKING....
     _peers[0]
@@ -62,6 +61,11 @@ PeerStore.dispatchToken = AppDispatcher.register((payload) ->
     when ActionTypes.LOCAL_WEBCAM_STARTED
       console.log("Setting _myVideo", action.video)
       _myVideo = action.video
+      # AppDispatcher.waitFor [PeerStore.dispatchToken]
+      PeerStore.emitChange()
+    when ActionTypes.LOCAL_WEBCAM_REMOVED
+      console.log("removing _myVideo", action.video)
+      _myVideo = undefined
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()
     when ActionTypes.NEW_PEER

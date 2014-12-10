@@ -4,7 +4,7 @@ fs = require("fs")
 path = require('path')
 express = require("express")
 morgan = require('morgan')
-
+_ = require('lodash')
 port = process.env.PORT or 9090
 
 # CINE IO API KEYS
@@ -46,7 +46,16 @@ if secretKey
     res.render('index', publicKey: publicKey)
 
   app.get '/identity/:identity', (req, res)->
-    res.send generateSecureIdentity(req.param('identity'), secretKey)
+    identity = req.param('identity')
+    allIdentities[identity] = true
+    res.send generateSecureIdentity(identity, secretKey)
+
+  app.get '/unidentify/:identity', (req, res)->
+    delete allIdentities[req.param('identity')]
+    res.status(200).end()
+
+  app.get '/lobby', (req, res)->
+    res.send identities: _.keys(allIdentities)
 
 else
   app.get '', (req, res)->

@@ -78,6 +78,9 @@ html, body, #container{
 .controls ul li{
   display: inline;
 }
+.controls .mute{
+  display: inline-block;
+}
 .small-videos {
   position: absolute;
   bottom: 20px;

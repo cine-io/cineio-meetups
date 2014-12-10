@@ -20,11 +20,25 @@ CineAPIBridge =
     else
       CineIOPeer.call(identity)
 
-  mute: ->
+  startCameraAndMicrophone: ->
+    console.log("CineAPIBridge startCameraAndMicrophone")
+    CineIOPeer.startCameraAndMicrophone CineAPIBridge.stared
+
+  muteAudio: ->
+    console.log("CineAPIBridge muteAudio")
     CineIOPeer.stopMicrophone()
 
-  unmute: ->
+  unmuteAudio: ->
+    console.log("CineAPIBridge unmuteAudio")
     CineIOPeer.startMicrophone()
+
+  muteVideo: ->
+    console.log("CineAPIBridge muteVideo")
+    CineIOPeer.stopCamera()
+
+  unmuteVideo: ->
+    console.log("CineAPIBridge unmuteVideo")
+    CineIOPeer.startCamera()
 
   init: ->
     CineIOPeer.on 'mediaRejected', (data)->
@@ -58,13 +72,13 @@ CineAPIBridge =
         CineActionCreators.newPeer(data.videoElement)
 
     CineIOPeer.on 'mediaRemoved', (data)->
-      console.log("Media added")
+      console.log("Media removed")
       if data.local
         CineActionCreators.localWebcamRemoved(data.videoElement)
       else
         console.log("REMOTE PEERRRR")
         CineActionCreators.peerLeft(data.videoElement)
 
-    CineIOPeer.startCameraAndMicrophone CineAPIBridge.stared
+    CineAPIBridge.startCameraAndMicrophone()
 
 module.exports = CineAPIBridge

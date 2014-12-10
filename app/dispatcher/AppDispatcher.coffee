@@ -16,6 +16,12 @@ actions =
       action: action
     this.dispatch(payload)
 
+  handleServerAction: (action)->
+    payload =
+      source: PayloadSources.SERVER_ACTION
+      action: action
+    this.dispatch(payload)
+
 AppDispatcher = assign new Dispatcher(), actions
 
 module.exports = AppDispatcher

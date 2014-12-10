@@ -10,15 +10,20 @@ module.exports =
     CALL_REJECTED: null
     CALL_REJECT: null
     INCOMING_CALL_REJECTED: null
+    ALL_IDENTITIES: null
     CALL_HANGUP: null
     INVITE: null
     OUTGOING_CALL: null
     JOIN_ROOM: null
     NEW_PEER: null
     PEER_LEFT: null
-    MUTE: null
-    UNMUTE: null
+    MUTE_AUDIO: null
+    UNMUTE_AUDIO: null
+    MUTE_VIDEO: null
+    UNMUTE_VIDEO: null
     LOCAL_WEBCAM_STARTED: null
+    LOCAL_WEBCAM_REMOVED: null
   PayloadSources: keyMirror
     CINE_ACTION: null
+    SERVER_ACTION: null
     VIEW_ACTION: null

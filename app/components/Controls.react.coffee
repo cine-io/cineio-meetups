@@ -4,6 +4,7 @@ assign = require("object-assign")
 JoinRoom = require('./JoinRoom.react')
 IncomingCall = require('./IncomingCall.react')
 OngoingCall = require('./OngoingCall.react')
+MuteButton = require('./MuteButton.react')
 Call = require('./Call.react')
 Identify = require('./Identify.react')
 SessionStore = require('../stores/SessionStore')
@@ -11,7 +12,7 @@ PeerStore = require('../stores/PeerStore')
 SessionActionCreators = require('../actions/SessionActionCreators')
 
 stateFromSessionStore = ->
-  return {currentCall: PeerStore.getCurrentCall(), currentRoom: SessionStore.getCurrentRoom(), muted: SessionStore.muted(), identity: SessionStore.getIdentity()}
+  return {currentCall: PeerStore.getCurrentCall(), currentRoom: SessionStore.getCurrentRoom(), identity: SessionStore.getIdentity()}
 
 module.exports = React.createClass
 
@@ -38,14 +39,6 @@ module.exports = React.createClass
 
   exitIdentify: ->
     @setState(identifying: false)
-
-  mute: (event)->
-    event.preventDefault()
-    SessionActionCreators.mute()
-
-  unmute: (event)->
-    event.preventDefault()
-    SessionActionCreators.unmute()
 
   componentDidMount: ->
     SessionStore.addChangeListener(@_onChange)
@@ -78,10 +71,6 @@ module.exports = React.createClass
       view = (<Call callback={@exitCall} />)
 
     else
-      if @state.muted
-        muteButton = (<button onClick={@unmute}>Unmute</button>)
-      else
-        muteButton = (<button onClick={@mute}>Mute</button>)
 
       if @state.identity
         callButton = (<button onClick={@call}>({@state.identity}) Call</button>)
@@ -91,7 +80,7 @@ module.exports = React.createClass
       view = (
         <ul>
           <li>
-            {muteButton}
+            <MuteButton />
           </li>
           <li>
             {callButton}

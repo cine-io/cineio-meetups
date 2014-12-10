@@ -46,15 +46,28 @@ SessionActionCreators =
       type: ActionTypes.CALL_HANGUP
       call: call
 
-  mute: ->
+  muteAudio: ->
     AppDispatcher.handleViewAction
-      type: ActionTypes.MUTE
-    CineAPIBridge.mute()
+      type: ActionTypes.MUTE_AUDIO
+    CineAPIBridge.muteAudio()
 
-  unmute: ->
+  unmuteAudio: ->
     AppDispatcher.handleViewAction
-      type: ActionTypes.UNMUTE
-    CineAPIBridge.unmute()
+      type: ActionTypes.UNMUTE_AUDIO
+    CineAPIBridge.unmuteAudio()
+
+  muteVideo: ->
+    AppDispatcher.handleViewAction
+      type: ActionTypes.MUTE_VIDEO
+    CineAPIBridge.muteVideo()
+
+  unmuteVideo: ->
+    AppDispatcher.handleViewAction
+      type: ActionTypes.UNMUTE_VIDEO
+    CineAPIBridge.unmuteVideo()
+
+  startCameraAndMicrophone: ->
+    CineAPIBridge.startCameraAndMicrophone()
 
   identify: (name)->
     ServerAPIBridge.identify(name)

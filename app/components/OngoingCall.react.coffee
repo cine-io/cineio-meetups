@@ -1,13 +1,9 @@
 # @cjsx React.DOM
 React = require('react')
 SessionActionCreators = require('../actions/SessionActionCreators')
-SessionStore = require('../stores/SessionStore')
-assign = require("object-assign")
+MuteButton = require('./MuteButton.react')
 
 ESCAPE_KEY = 27
-
-stateFromSessionStore = ->
-  return {muted: SessionStore.muted()}
 
 module.exports = React.createClass
   propTypes:
@@ -15,16 +11,7 @@ module.exports = React.createClass
     room: React.PropTypes.string
 
   getInitialState: ->
-    return assign({inviting: false, inviteName: ''}, stateFromSessionStore())
-
-  componentDidMount: ->
-    SessionStore.addChangeListener(@_onChange)
-
-  componentWillUnmount: ->
-    SessionStore.removeChangeListener(@_onChange)
-
-  _onChange: ->
-    @setState(stateFromSessionStore())
+    return {inviting: false, inviteName: ''}
 
   _onKeyDown: (event)->
     if event.keyCode == ESCAPE_KEY
@@ -48,14 +35,6 @@ module.exports = React.createClass
     @props.call.hangup()
     SessionActionCreators.callHangup(@props.call)
 
-  mute: (event)->
-    event.preventDefault()
-    SessionActionCreators.mute()
-
-  unmute: (event)->
-    event.preventDefault()
-    SessionActionCreators.unmute()
-
   leaveRoom: (event)->
     SessionActionCreators.leaveRoom(@props.room)
     event.preventDefault()
@@ -70,10 +49,6 @@ module.exports = React.createClass
       @refs.myTextInput.getDOMNode().focus()
 
   render: ->
-    if @state.muted
-      muteButton = (<button onClick={@unmute}>Unmute</button>)
-    else
-      muteButton = (<button onClick={@mute}>Mute</button>)
 
     if @props.call
       hangupButton = (<button onClick={@hangup}>Hangup</button>)
@@ -92,7 +67,7 @@ module.exports = React.createClass
     return (
       <ul className="ongoing-call">
         <li>
-          {muteButton}
+          <MuteButton />
         </li>
         <li>
           {inviteButton}

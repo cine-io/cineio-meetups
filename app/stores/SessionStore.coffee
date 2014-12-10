@@ -11,7 +11,8 @@ CHANGE_EVENT = "change"
 
 _room = null
 _identity = null
-_muted = false
+_audioMuted = false
+_videoMuted = false
 
 SessionStore = assign {}, EventEmitter::,
   emitChange: ->
@@ -31,18 +32,19 @@ SessionStore = assign {}, EventEmitter::,
   #   _messages[id]
 
   getCurrentRoom: ->
-    console.log("returing current room", _room)
     _room
 
   getIdentity: ->
     _identity
 
-  muted: ->
-    _muted
+  videoMuted: ->
+    _videoMuted
+
+  audioMuted: ->
+    _audioMuted
 
 console.log("SETTING DISPATCHER")
 SessionStore.dispatchToken = AppDispatcher.register((payload) ->
-  console.log("GOT PAYLOAD", payload)
   action = payload.action
   switch action.type
     when ActionTypes.JOIN_ROOM
@@ -56,16 +58,30 @@ SessionStore.dispatchToken = AppDispatcher.register((payload) ->
       # AppDispatcher.waitFor [SessionStore.dispatchToken]
       SessionStore.emitChange()
     when ActionTypes.SET_IDENTITY
-      console.log("LEAVING room", action.room)
+      console.log("SET_IDENTITY", action.room)
       _identity = action.identity
       # AppDispatcher.waitFor [SessionStore.dispatchToken]
       SessionStore.emitChange()
-    when ActionTypes.MUTE
-      _muted = true
+    when ActionTypes.LOCAL_WEBCAM_STARTED
+      console.log("LOCAL_WEBCAM_STARTED", action.video)
+      _audioMuted = false
+      _videoMuted = false
       # AppDispatcher.waitFor [SessionStore.dispatchToken]
       SessionStore.emitChange()
-    when ActionTypes.UNMUTE
-      _muted = false
+    when ActionTypes.MUTE_AUDIO
+      _audioMuted = true
+      # AppDispatcher.waitFor [SessionStore.dispatchToken]
+      SessionStore.emitChange()
+    when ActionTypes.UNMUTE_AUDIO
+      _audioMuted = false
+      # AppDispatcher.waitFor [SessionStore.dispatchToken]
+      SessionStore.emitChange()
+    when ActionTypes.MUTE_VIDEO
+      _videoMuted = true
+      # AppDispatcher.waitFor [SessionStore.dispatchToken]
+      SessionStore.emitChange()
+    when ActionTypes.UNMUTE_VIDEO
+      _videoMuted = false
       # AppDispatcher.waitFor [SessionStore.dispatchToken]
       SessionStore.emitChange()
     else
