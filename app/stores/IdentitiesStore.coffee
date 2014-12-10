@@ -23,8 +23,8 @@ IdentitiesStore = assign {}, EventEmitter::,
   removeChangeListener: (callback) ->
     @removeListener CHANGE_EVENT, callback
 
-  getIdentitities: ->
-    _identities
+  getIdentities: ->
+    _identities.slice(0) #clone
 
 console.log("SETTING DISPATCHER")
 IdentitiesStore.dispatchToken = AppDispatcher.register((payload) ->
