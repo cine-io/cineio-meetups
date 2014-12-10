@@ -13,6 +13,7 @@ _room = null
 _identity = null
 _audioMuted = false
 _videoMuted = false
+_screenShareStarted = false
 
 SessionStore = assign {}, EventEmitter::,
   emitChange: ->
@@ -42,6 +43,9 @@ SessionStore = assign {}, EventEmitter::,
 
   audioMuted: ->
     _audioMuted
+
+  screenShareStarted: ->
+    _screenShareStarted
 
 console.log("SETTING DISPATCHER")
 SessionStore.dispatchToken = AppDispatcher.register((payload) ->
@@ -82,6 +86,14 @@ SessionStore.dispatchToken = AppDispatcher.register((payload) ->
       SessionStore.emitChange()
     when ActionTypes.UNMUTE_VIDEO
       _videoMuted = false
+      # AppDispatcher.waitFor [SessionStore.dispatchToken]
+      SessionStore.emitChange()
+    when ActionTypes.START_SCREEN_SHARE
+      _screenShareStarted = true
+      # AppDispatcher.waitFor [SessionStore.dispatchToken]
+      SessionStore.emitChange()
+    when ActionTypes.STOP_SCREEN_SHARE
+      _screenShareStarted = false
       # AppDispatcher.waitFor [SessionStore.dispatchToken]
       SessionStore.emitChange()
     else

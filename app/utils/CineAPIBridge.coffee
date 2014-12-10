@@ -22,7 +22,7 @@ CineAPIBridge =
 
   startCameraAndMicrophone: ->
     console.log("CineAPIBridge startCameraAndMicrophone")
-    CineIOPeer.startCameraAndMicrophone CineAPIBridge.stared
+    CineIOPeer.startCameraAndMicrophone()
 
   muteAudio: ->
     console.log("CineAPIBridge muteAudio")
@@ -35,6 +35,14 @@ CineAPIBridge =
   muteVideo: ->
     console.log("CineAPIBridge muteVideo")
     CineIOPeer.stopCamera()
+
+  startScreenShare: ->
+    console.log("CineAPIBridge startScreenShare")
+    CineIOPeer.startScreenShare()
+
+  stopScreenShare: ->
+    console.log("CineAPIBridge stopScreenShare")
+    CineIOPeer.stopScreenShare()
 
   unmuteVideo: ->
     console.log("CineAPIBridge unmuteVideo")
@@ -66,7 +74,10 @@ CineAPIBridge =
     CineIOPeer.on 'mediaAdded', (data)->
       console.log("Media added")
       if data.local
-        CineActionCreators.localWebcamStarted(data.videoElement)
+        if data.type == 'camera'
+          CineActionCreators.localWebcamStarted(data.videoElement)
+        else if data.type == 'screen'
+          CineActionCreators.localScreenShareStarted(data.videoElement)
       else
         console.log("REMOTE PEERRRR")
         CineActionCreators.newPeer(data.videoElement)
@@ -74,7 +85,10 @@ CineAPIBridge =
     CineIOPeer.on 'mediaRemoved', (data)->
       console.log("Media removed")
       if data.local
-        CineActionCreators.localWebcamRemoved(data.videoElement)
+        if data.type == 'camera'
+          CineActionCreators.localWebcamRemoved(data.videoElement)
+        else if data.type == 'screen'
+          CineActionCreators.localScreenShareRemoved(data.videoElement)
       else
         console.log("REMOTE PEERRRR")
         CineActionCreators.peerLeft(data.videoElement)

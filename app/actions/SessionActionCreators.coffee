@@ -66,6 +66,16 @@ SessionActionCreators =
       type: ActionTypes.UNMUTE_VIDEO
     CineAPIBridge.unmuteVideo()
 
+  stopScreenShare: ->
+    AppDispatcher.handleViewAction
+      type: ActionTypes.MUTE_VIDEO
+    CineAPIBridge.stopScreenShare()
+
+  startScreenShare: ->
+    AppDispatcher.handleViewAction
+      type: ActionTypes.UNMUTE_VIDEO
+    CineAPIBridge.startScreenShare()
+
   startCameraAndMicrophone: ->
     CineAPIBridge.startCameraAndMicrophone()
 

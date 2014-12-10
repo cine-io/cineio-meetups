@@ -23,6 +23,10 @@ module.exports =
     UNMUTE_VIDEO: null
     LOCAL_WEBCAM_STARTED: null
     LOCAL_WEBCAM_REMOVED: null
+    LOCAL_SCREEN_SHARE_STARTED: null
+    LOCAL_SCREEN_SHARE_REMOVED: null
+    STOP_SCREEN_SHARE: null
+    START_SCREEN_SHARE: null
   PayloadSources: keyMirror
     CINE_ACTION: null
     SERVER_ACTION: null

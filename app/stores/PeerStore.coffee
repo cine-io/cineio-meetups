@@ -11,6 +11,7 @@ CHANGE_EVENT = "change"
 
 _peers = []
 _myVideo = null
+_myScreenShare = null
 _currentCall = null
 _ringer = null
 
@@ -46,9 +47,16 @@ PeerStore = assign {}, EventEmitter::,
     for peer in _peers
       otherVideos.push peer unless peer == mainVideo
 
-    otherVideos.push _myVideo unless _myVideo == mainVideo
+    otherVideos.push _myVideo if _myVideo && _myVideo != mainVideo
+    otherVideos.push _myScreenShare if _myScreenShare && _myScreenShare != mainVideo
 
     otherVideos
+
+  getCameraStream: ->
+    _myVideo
+
+  getScreenShareStream: ->
+    _myScreenShare
 
   getMainVideo: ->
     return _myVideo if _peers.length == 0
@@ -66,6 +74,16 @@ PeerStore.dispatchToken = AppDispatcher.register((payload) ->
     when ActionTypes.LOCAL_WEBCAM_REMOVED
       console.log("removing _myVideo", action.video)
       _myVideo = undefined
+      # AppDispatcher.waitFor [PeerStore.dispatchToken]
+      PeerStore.emitChange()
+    when ActionTypes.LOCAL_SCREEN_SHARE_STARTED
+      console.log("Setting _myScreenShare", action.video)
+      _myScreenShare = action.video
+      # AppDispatcher.waitFor [PeerStore.dispatchToken]
+      PeerStore.emitChange()
+    when ActionTypes.LOCAL_SCREEN_SHARE_REMOVED
+      console.log("removing _myScreenShare", action.video)
+      _myScreenShare = undefined
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()
     when ActionTypes.NEW_PEER

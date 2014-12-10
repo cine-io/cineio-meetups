@@ -4,7 +4,7 @@ assign = require("object-assign")
 JoinRoom = require('./JoinRoom.react')
 IncomingCall = require('./IncomingCall.react')
 OngoingCall = require('./OngoingCall.react')
-MuteButton = require('./MuteButton.react')
+MediaControls = require('./MediaControls.react')
 Call = require('./Call.react')
 Identify = require('./Identify.react')
 SessionStore = require('../stores/SessionStore')
@@ -80,7 +80,7 @@ module.exports = React.createClass
       view = (
         <ul>
           <li>
-            <MuteButton />
+            <MediaControls />
           </li>
           <li>
             {callButton}

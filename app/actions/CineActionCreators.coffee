@@ -17,6 +17,16 @@ module.exports =
       type: ActionTypes.LOCAL_WEBCAM_REMOVED
       video: video
 
+  localScreenShareStarted: (video)->
+    AppDispatcher.handleCineAction
+      type: ActionTypes.LOCAL_SCREEN_SHARE_STARTED
+      video: video
+
+  localScreenShareRemoved: (video)->
+    AppDispatcher.handleCineAction
+      type: ActionTypes.LOCAL_SCREEN_SHARE_REMOVED
+      video: video
+
   newPeer: (video)->
     AppDispatcher.handleCineAction
       type: ActionTypes.NEW_PEER

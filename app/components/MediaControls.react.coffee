@@ -4,9 +4,10 @@ React = require('react')
 SessionActionCreators = require('../actions/SessionActionCreators')
 assign = require("object-assign")
 SessionStore = require('../stores/SessionStore')
+PeerStore = require('../stores/PeerStore')
 
 stateFromSessionStore = ->
-  return {audioMuted: SessionStore.audioMuted(), videoMuted: SessionStore.videoMuted()}
+  return {screenShareStarted: PeerStore.getScreenShareStream(), cameraAndMicStarted: PeerStore.getCameraStream(), audioMuted: SessionStore.audioMuted(), videoMuted: SessionStore.videoMuted()}
 
 module.exports = React.createClass
 
@@ -29,25 +30,43 @@ module.exports = React.createClass
     event.preventDefault()
     SessionActionCreators.unmuteVideo()
 
+  stopScreenShare: (event)->
+    event.preventDefault()
+    SessionActionCreators.stopScreenShare()
+
+  startScreenShare: (event)->
+    event.preventDefault()
+    SessionActionCreators.startScreenShare()
+
   startCameraAndMicrophone: (event)->
     event.preventDefault()
     SessionActionCreators.startCameraAndMicrophone()
 
   componentDidMount: ->
     SessionStore.addChangeListener(@_onChange)
+    PeerStore.addChangeListener(@_onChange)
 
   componentWillUnmount: ->
     SessionStore.removeChangeListener(@_onChange)
+    PeerStore.removeChangeListener(@_onChange)
 
   _onChange: ->
     @setState(stateFromSessionStore())
 
   render: ->
-    if @state.audioMuted && @state.videoMuted
+    if @state.screenShareStarted
+      screenShareButton = (<button onClick={@stopScreenShare}>Stop Screen Share</button>)
+    else
+      screenShareButton = (<button onClick={@startScreenShare}>Screen Share</button>)
+
+    if !@state.cameraAndMicStarted
       return (
         <ul className="mute">
           <li>
             <button onClick={@startCameraAndMicrophone}>Turn on Mic and Camera</button>
+          </li>
+          <li>
+            {screenShareButton}
           </li>
         </ul>
       )
@@ -69,6 +88,9 @@ module.exports = React.createClass
         </li>
         <li>
           {videoButton}
+        </li>
+        <li>
+          {screenShareButton}
         </li>
       </ul>
     )

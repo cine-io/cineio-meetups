@@ -1,7 +1,7 @@
 # @cjsx React.DOM
 React = require('react')
 SessionActionCreators = require('../actions/SessionActionCreators')
-MuteButton = require('./MuteButton.react')
+MediaControls = require('./MediaControls.react')
 
 ESCAPE_KEY = 27
 
@@ -67,7 +67,7 @@ module.exports = React.createClass
     return (
       <ul className="ongoing-call">
         <li>
-          <MuteButton />
+          <MediaControls />
         </li>
         <li>
           {inviteButton}
