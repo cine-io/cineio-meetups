@@ -128,6 +128,7 @@ html, body, #container{
   height: 22px;
 }
 
+/* http://css-tricks.com/examples/hrs/ */
 .chat-wrapper hr{
   margin: 0px 3px;
   height: 1px;
