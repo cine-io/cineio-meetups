@@ -11,5 +11,5 @@ npm-debug.log
 .flooignore
 .sass-cache
 .env
-.sublime-project
-.sublime-workspace
+*.sublime-project
+*.sublime-workspace
