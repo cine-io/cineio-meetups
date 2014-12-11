@@ -80,7 +80,7 @@ CineAPIBridge =
       CineActionCreators.gotPeerData(data)
       # data.call.answer()
 
-    CineIOPeer.on 'mediaAdded', (data)->
+    CineIOPeer.on 'media-added', (data)->
       console.log("Media added")
       if data.local
         if data.type == 'camera'
@@ -91,7 +91,7 @@ CineAPIBridge =
         console.log("REMOTE PEERRRR")
         CineActionCreators.newPeer(data.videoElement)
 
-    CineIOPeer.on 'mediaRemoved', (data)->
+    CineIOPeer.on 'media-removed', (data)->
       console.log("Media removed")
       if data.local
         if data.type == 'camera'
