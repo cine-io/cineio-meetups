@@ -53,7 +53,7 @@ CineAPIBridge =
     CineIOPeer.startCamera()
 
   init: ->
-    CineIOPeer.on 'mediaRejected', (data)->
+    CineIOPeer.on 'media-rejected', (data)->
       alert('Permission denied.')
 
     CineIOPeer.on 'error', (err)->

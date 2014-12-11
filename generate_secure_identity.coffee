@@ -1,14 +1,19 @@
 crypto = require('crypto')
 
-module.exports = (identity, secretKey)->
+generateSignature = (identity, timestamp, secretKey)->
   shasum = crypto.createHash('sha1')
-  timestamp = Math.floor(Date.now() / 1000)
 
   signatureToSha = "identity=#{identity}&timestamp=#{timestamp}#{secretKey}"
   shasum.update(signatureToSha)
-  signature = shasum.digest('hex')
+  shasum.digest('hex')
+
+generateSecureIdentity = (identity, secretKey)->
+  timestamp = Math.floor(Date.now() / 1000)
+  signature = generateSignature(identity, timestamp, secretKey)
   response =
     timestamp:  timestamp
     signature: signature
     identity: identity
   return response
+
+module.exports = generateSecureIdentity
