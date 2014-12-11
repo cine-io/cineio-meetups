@@ -14,6 +14,7 @@ _myVideo = null
 _myScreenShare = null
 _currentCall = null
 _ringer = null
+_mainVideo = null
 
 startRing = ->
   _ringer = new Howl
@@ -61,11 +62,16 @@ PeerStore = assign {}, EventEmitter::,
   getMainVideo: ->
     return _myVideo if _peers.length == 0
     # FANCY MAGIC ON WHO'S TALKING....
-    _peers[0]
+    _mainVideo ||= _peers[0]
 
 PeerStore.dispatchToken = AppDispatcher.register((payload) ->
   action = payload.action
   switch action.type
+    when ActionTypes.SELECT_VIDEO
+      console.log("Setting mainVideo", action.video)
+      _mainVideo = action.video
+      # AppDispatcher.waitFor [PeerStore.dispatchToken]
+      PeerStore.emitChange()
     when ActionTypes.LOCAL_WEBCAM_STARTED
       console.log("Setting _myVideo", action.video)
       _myVideo = action.video
@@ -123,6 +129,7 @@ PeerStore.dispatchToken = AppDispatcher.register((payload) ->
     when ActionTypes.PEER_LEFT
       console.log("removing Peer", action.video)
       index = _peers.indexOf action.video
+      _mainVideo = null if _mainVideo == action.video
       _peers.splice index, 1
       _currentCall = null if _peers.length == 0
       # _peers.push action.video

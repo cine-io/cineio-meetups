@@ -89,6 +89,7 @@ html, body, #container{
 }
 .small-videos video{
   height: 120px;
+  cursor: pointer;
 }
 .ongoing-call form{
   display: inline-block;

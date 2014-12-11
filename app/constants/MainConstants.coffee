@@ -27,6 +27,7 @@ module.exports =
     LOCAL_SCREEN_SHARE_REMOVED: null
     STOP_SCREEN_SHARE: null
     START_SCREEN_SHARE: null
+    SELECT_VIDEO: null
   PayloadSources: keyMirror
     CINE_ACTION: null
     SERVER_ACTION: null
