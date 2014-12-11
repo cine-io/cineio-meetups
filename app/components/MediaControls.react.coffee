@@ -51,7 +51,7 @@ module.exports = React.createClass
     PeerStore.removeChangeListener(@_onChange)
 
   _onChange: ->
-    @setState(stateFromSessionStore())
+    @setState(stateFromSessionStore()) if @isMounted()
 
   render: ->
     if @state.screenShareStarted
