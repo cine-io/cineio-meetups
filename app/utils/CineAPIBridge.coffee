@@ -20,6 +20,10 @@ CineAPIBridge =
     else
       CineIOPeer.call(identity)
 
+  sendDataToAll: (data)->
+    console.log("CineAPIBridge sendDataToAll", data)
+    CineIOPeer.sendDataToAll(data)
+
   startCameraAndMicrophone: ->
     console.log("CineAPIBridge startCameraAndMicrophone")
     CineIOPeer.startCameraAndMicrophone()
@@ -69,6 +73,11 @@ CineAPIBridge =
     CineIOPeer.on 'call-reject', (data)->
       console.log("CURRENT CALL", data)
       CineActionCreators.callRejected(data.call)
+      # data.call.answer()
+
+    CineIOPeer.on 'peer-data', (data)->
+      console.log("GOT DATA CALL", data)
+      CineActionCreators.gotPeerData(data)
       # data.call.answer()
 
     CineIOPeer.on 'mediaAdded', (data)->

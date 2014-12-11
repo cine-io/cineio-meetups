@@ -28,6 +28,8 @@ module.exports =
     STOP_SCREEN_SHARE: null
     START_SCREEN_SHARE: null
     SELECT_VIDEO: null
+    CREATE_MESSAGE: null
+    NEW_MESSAGE: null
   PayloadSources: keyMirror
     CINE_ACTION: null
     SERVER_ACTION: null

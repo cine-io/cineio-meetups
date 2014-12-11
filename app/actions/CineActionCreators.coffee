@@ -51,3 +51,12 @@ module.exports =
     AppDispatcher.handleCineAction
       type: ActionTypes.PEER_LEFT
       video: video
+
+  gotPeerData: (data)->
+    if data.type == 'message'
+      AppDispatcher.handleCineAction
+        type: ActionTypes.NEW_MESSAGE
+        message: data
+    # useless else
+    else
+      return

@@ -5,6 +5,7 @@ CineAPIBridge = require('./utils/CineAPIBridge')
 ServerAPIBridge = require('./utils/ServerAPIBridge')
 PeerStore = require('./stores/PeerStore')
 SessionStore = require('./stores/SessionStore')
+MessageStore = require('./stores/MessageStore')
 IdentitiesStore = require('./stores/IdentitiesStore')
 
 CineAPIBridge.init()
