@@ -15,6 +15,7 @@
     "jade": "^1.8.1",
     "keymirror": "^0.1.0",
     "lodash": "^2.4.1",
+    "moment": "^2.8.4",
     "morgan": "^1.5.0",
     "newrelic": "^1.14.1",
     "node-cjsx": "^0.1.2",

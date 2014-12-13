@@ -38,7 +38,7 @@ module.exports = (grunt) ->
 
     watch:
       client:
-        files: ["client/**/*"]
+        files: ["app/**/*"]
         tasks: ["browserify", "concat", "uglify"]
       scss:
         files: ["scss/**/*"]
