@@ -58,7 +58,7 @@ CineAPIBridge =
 
     CineIOPeer.on 'error', (err)->
       if (typeof(err.support) != "undefined" && !err.support)
-        alert("This browser does not support WebRTC.</h1>")
+        alert("This browser does not support WebRTC.")
       else if (err.msg)
         alert(err.msg)
 
