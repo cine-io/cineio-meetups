@@ -5467,6 +5467,11 @@ html, body, #container {
   width: 100%;
   height: 100%; }
 
+.messages ul {
+  padding-left: 0; }
+  .messages ul li {
+    list-style-type: none; }
+
 .message {
   padding: 0 3px;
   margin-bottom: 5px; }
