@@ -1,3 +1,7 @@
+* {
+  font-family: $default-font-family;
+}
+
 html, body, #container{
   height: 100%;
   width: 100%;
@@ -20,28 +24,32 @@ html, body, #container{
 
 #video-chat{
   left: 0;
-  right: 200px;
+  right: 220px;
 }
 
 #text-chat{
-  width: 200px;
+  width: 220px;
   right: 0;
   background: white;
   color: black;
 }
 
-.controls{
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2
-}
-.controls{
+.controls {
   text-align: center;
 }
-.controls ul li{
-  display: inline;
+.controls button {
+  width: 44px;
+  height: 44px;
+}
+.controls button.camera-and-microphone {
+  width: 84px;
+}
+.controls ul {
+  padding-left: 0;
+  margin: 0;
+  li {
+    display: inline;
+  }
 }
 .controls .mute{
   display: inline-block;
@@ -73,19 +81,13 @@ html, body, #container{
   height: 100%;
   width: 100%;
 }
-.chat-wrapper h3{
-  height: 22px;
-}
 
-/* http://css-tricks.com/examples/hrs/ */
-.chat-wrapper hr{
-  margin: 0px 3px;
-  height: 1px;
-  border: 0;
-  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-  background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-  background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-  background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+.chat-wrapper h4 {
+  margin-top: 0;
+  padding: 0.25em 0.5em;
+  background-color: #eee;
+  font-weight: bold;
+  font-size: 1em;
 }
 
 .chat-wrapper .messages, .chat-wrapper .new-message{
@@ -95,12 +97,11 @@ html, body, #container{
   z-index: 1;
 }
 .chat-wrapper .messages{
-  top: 30px;
-  bottom: 60px;
+  bottom: 104px;
 }
 .new-message{
   height: 60px;
-  bottom: 0;
+  bottom: 44px;
 }
 .new-message form{
   padding: 0 3px;

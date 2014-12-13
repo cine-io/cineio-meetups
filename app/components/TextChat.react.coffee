@@ -60,8 +60,7 @@ module.exports = React.createClass
       )
     return (
       <div className="chat-wrapper">
-        <h3>Group Chat</h3>
-        <hr/>
+        <h4>Group Chat</h4>
         <div className="messages">
           <ul>
             {messages}

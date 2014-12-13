@@ -12,15 +12,14 @@ module.exports = React.createClass({
     return (
       <div id="example">
         <div id="video-chat">
-          <Controls />
           <MainVideo />
           <SmallVideos />
         </div>
         <div id="text-chat">
+          <Controls />
           <TextChat />
         </div>
       </div>
     )
-
 
 })

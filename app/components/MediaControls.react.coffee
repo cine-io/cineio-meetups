@@ -55,15 +55,21 @@ module.exports = React.createClass
 
   render: ->
     if @state.screenShareStarted
-      screenShareButton = (<button onClick={@stopScreenShare}>Stop Screen Share</button>)
+      screenShareButton = (<button onClick={@stopScreenShare}><i className="fa fa-2x fa-desktop"></i></button>)
     else
-      screenShareButton = (<button onClick={@startScreenShare}>Screen Share</button>)
+      screenShareButton = (<button onClick={@startScreenShare}><i className="fa fa-2x fa-desktop"></i></button>)
 
     if !@state.cameraAndMicStarted
       return (
         <ul className="mute">
           <li>
-            <button onClick={@startCameraAndMicrophone}>Turn on Mic and Camera</button>
+            <button className="camera-and-microphone" onClick={@startCameraAndMicrophone}>
+              <i className="fa fa-2x fa-video-camera"></i>
+              &nbsp;
+              <i className="fa fa-plus"></i>
+              &nbsp
+              <i className="fa fa-2x fa-microphone"></i>
+            </button>
           </li>
           <li>
             {screenShareButton}
@@ -72,22 +78,22 @@ module.exports = React.createClass
       )
     else
       if @state.audioMuted
-        audioButton = (<button onClick={@unmuteAudio}>Unmute</button>)
+        audioButton = (<button onClick={@unmuteAudio}><i className="fa fa-2x fa-microphone"></i></button>)
       else
-        audioButton = (<button onClick={@muteAudio}>Mute</button>)
+        audioButton = (<button onClick={@muteAudio}><i className="fa fa-2x fa-microphone"></i></button>)
 
       if @state.videoMuted
-        videoButton = (<button onClick={@unmuteVideo}>On Camera</button>)
+        videoButton = (<button onClick={@unmuteVideo}><i className="fa fa-2x fa-video-camera"></i></button>)
       else
-        videoButton = (<button onClick={@muteVideo}>Off Camera</button>)
+        videoButton = (<button onClick={@muteVideo}><i className="fa fa-2x fa-video-camera"></i></button>)
 
     return (
       <ul className="mute">
         <li>
-          {audioButton}
+          {videoButton}
         </li>
         <li>
-          {videoButton}
+          {audioButton}
         </li>
         <li>
           {screenShareButton}

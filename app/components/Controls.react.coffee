@@ -73,9 +73,9 @@ module.exports = React.createClass
     else
 
       if @state.identity
-        callButton = (<button onClick={@call}>({@state.identity}) Call</button>)
+        callButton = (<button onClick={@call}><i className="fa fa-2x fa-phone"></i></button>)
       else
-        callButton = (<button onClick={@identify}>Identify</button>)
+        callButton = (<button onClick={@identify}><i className="fa fa-2x fa-user"></i></button>)
 
       view = (
         <ul>
@@ -86,7 +86,7 @@ module.exports = React.createClass
             {callButton}
           </li>
           <li>
-            <button onClick={@joinRoom}>Join Room</button>
+            <button onClick={@joinRoom}><i className="fa fa-2x fa-sign-in"></i></button>
           </li>
         </ul>
       )
