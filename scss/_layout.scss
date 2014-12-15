@@ -3,12 +3,15 @@
 }
 
 html, body, #container{
+  margin: 0;
+  padding: 0;
   height: 100%;
   width: 100%;
   overflow: hidden;
 }
 
 #example{
+  margin: 0;
   width: 100%;
   height: 100%;
   background: black;
@@ -40,6 +43,7 @@ html, body, #container{
 .controls button {
   width: 44px;
   height: 44px;
+  padding: 0;
 }
 .controls button.camera-and-microphone {
   width: 84px;
@@ -67,6 +71,15 @@ html, body, #container{
 .ongoing-call form{
   display: inline-block;
   padding: 0 10px;
+}
+
+.toggle-button-on {
+  background-color: $toggle-button-on-bg-color;
+  color: $toggle-button-on-color;
+}
+.toggle-button-off {
+  background-color: $toggle-button-off-bg-color;
+  color: $toggle-button-off-color;
 }
 
 #main-video{

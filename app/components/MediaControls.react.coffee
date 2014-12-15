@@ -5,11 +5,21 @@ SessionActionCreators = require('../actions/SessionActionCreators')
 assign = require("object-assign")
 SessionStore = require('../stores/SessionStore')
 PeerStore = require('../stores/PeerStore')
+FAToggleButton = require('./FAToggleButton.react')
 
 stateFromSessionStore = ->
   return {screenShareStarted: PeerStore.getScreenShareStream(), cameraAndMicStarted: PeerStore.getCameraStream(), audioMuted: SessionStore.audioMuted(), videoMuted: SessionStore.videoMuted()}
 
 module.exports = React.createClass
+
+  hoverIcon: (event)->
+    event.preventDefault()
+    button = event.target
+    console.log button
+
+  toggleIconBan: (event)->
+    $button = $(event.target)
+
 
   getInitialState: ->
     return assign({}, stateFromSessionStore())
@@ -54,21 +64,27 @@ module.exports = React.createClass
     @setState(stateFromSessionStore()) if @isMounted()
 
   render: ->
-    if @state.screenShareStarted
-      screenShareButton = (<button onClick={@stopScreenShare}><i className="fa fa-2x fa-desktop"></i></button>)
-    else
-      screenShareButton = (<button onClick={@startScreenShare}><i className="fa fa-2x fa-desktop"></i></button>)
+    screenShareButtonOnClick = if @state.screenShareStarted then @stopScreenShare else @startScreenShare
+    console.log "screen share started?", @state.screenShareStarted
+    screenShareButton = (
+      <FAToggleButton
+        onClassName="cine-screenshare"
+        offClassName="cine-screenshare-slash"
+        buttonName="Screen Sharing"
+        isOn={if @state.screenShareStarted then true else false}
+        onClick={screenShareButtonOnClick}/>
+    )
 
     if !@state.cameraAndMicStarted
       return (
         <ul className="mute">
           <li>
             <button className="camera-and-microphone" onClick={@startCameraAndMicrophone}>
-              <i className="fa fa-2x fa-video-camera"></i>
+              <i className="fa fa-3x cine-video-camera"></i>
               &nbsp;
               <i className="fa fa-plus"></i>
-              &nbsp
-              <i className="fa fa-2x fa-microphone"></i>
+              &nbsp;
+              <i className="fa fa-3x cine-microphone"></i>
             </button>
           </li>
           <li>
@@ -77,15 +93,24 @@ module.exports = React.createClass
         </ul>
       )
     else
-      if @state.audioMuted
-        audioButton = (<button onClick={@unmuteAudio}><i className="fa fa-2x fa-microphone"></i></button>)
-      else
-        audioButton = (<button onClick={@muteAudio}><i className="fa fa-2x fa-microphone"></i></button>)
-
-      if @state.videoMuted
-        videoButton = (<button onClick={@unmuteVideo}><i className="fa fa-2x fa-video-camera"></i></button>)
-      else
-        videoButton = (<button onClick={@muteVideo}><i className="fa fa-2x fa-video-camera"></i></button>)
+      audioButtonOnClick = if @state.audioMuted then @unmuteAudio else @muteAudio
+      audioButton = (
+        <FAToggleButton
+          onClassName="cine-microphone"
+          offClassName="cine-microphone-slash"
+          buttonName="Microphone"
+          isOn={!@state.audioMuted}
+          onClick={audioButtonOnClick}/>
+      )
+      videoButtonOnClick = if @state.videoMuted then @unmuteVideo else @muteVideo
+      videoButton = (
+        <FAToggleButton
+          onClassName="cine-video-camera"
+          offClassName="cine-video-camera-slash"
+          buttonName="Video Camera"
+          isOn={!@state.videoMuted}
+          onClick={videoButtonOnClick}/>
+      )
 
     return (
       <ul className="mute">

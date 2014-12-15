@@ -75,6 +75,7 @@ if process.env.NODE_ENV == 'development'
 # serve static files
 app.use express.static(__dirname + "/public")
 
+
 httpServer.listen port, ->
   console.log "HTTP server started at http://localhost.cine.io:#{port}"
 

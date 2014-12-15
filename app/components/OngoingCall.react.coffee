@@ -51,9 +51,9 @@ module.exports = React.createClass
   render: ->
 
     if @props.call
-      hangupButton = (<button onClick={@hangup}><i className="fa fa-2x fa-phone"></i></button>)
+      hangupButton = (<button title="Hang up" onClick={@hangup}><i className="fa fa-3x cine-hangup"></i></button>)
     else
-      hangupButton = (<button onClick={@leaveRoom}><i className="fa fa-2x fa-sign-out"></i></button>)
+      hangupButton = (<button title="Leave room" onClick={@leaveRoom}><i className="fa fa-3x fa-sign-out"></i></button>)
 
     if @state.inviting
       inviteButton = (
@@ -62,7 +62,7 @@ module.exports = React.createClass
         </form>
       )
     else
-      inviteButton = (<button onClick={@invite}><i className="fa fa-2x fa-user"></i></button>)
+      inviteButton = (<button title="Invite user" onClick={@invite}><i className="fa fa-3x fa-user"></i></button>)
 
     return (
       <ul className="ongoing-call">
