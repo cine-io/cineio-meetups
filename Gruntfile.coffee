@@ -22,12 +22,10 @@ module.exports = (grunt) ->
         files:
           "public/css/bundle.css": "scss/app.scss"
       options:
-        loadPath: ["bower_components/bootstrap-sass-official/assets/stylesheets", "scss"]
+        loadPath: ["scss"]
 
     concat:
       ".compiled/bundle.js": [
-        "bower_components/jquery/dist/jquery.js"
-        "bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"
         ".compiled/app.js"
       ]
 
