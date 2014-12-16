@@ -30,8 +30,7 @@ module.exports = React.createClass
       @setState({text: event.target.value})
 
   _onSubmit: (event)->
-    event.preventDefault();
-    console.log("submitting")
+    event.preventDefault()
     text = event.currentTarget.value
     if text != '' && text != 'Cancel'
       SessionActionCreators.call(text)
