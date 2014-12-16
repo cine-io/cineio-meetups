@@ -36,7 +36,7 @@ module.exports = React.createClass
       <div className="identify">
         <form onSubmit={@_onSubmit}>
           <input ref="myTextInput" placeholder="Your name (required)" type='text' onKeyDown={@_onChange}/>
-          <button type="submit" onClick={@_onSubmit}>OK</button>
+          <button type="submit" className="ok" onClick={@_onSubmit}>OK</button>
         </form>
       </div>
     )

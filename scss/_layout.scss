@@ -39,49 +39,60 @@ html, body, #container{
 
 .controls {
   text-align: center;
-}
-.controls button {
-  width: 44px;
-  height: 44px;
-  padding: 0;
-}
-.controls button.camera-and-microphone {
-  width: 84px;
-}
-.controls ul {
-  padding-left: 0;
-  margin: 0;
-  li {
-    display: inline;
-  }
-}
-.controls .mute{
-  display: inline-block;
-}
 
-.identify {
+  ul {
+    padding-left: 0;
+    margin: 0;
+    li {
+      display: inline;
+    }
+  }
+
+  button {
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-right: 1px solid #eee;
+    padding: 0;
+    i.fa-sign-in {
+      height: 32px; // hack to make fa- and cine- font icons line up
+    }
+  }
+
+  button.camera-and-microphone {
+    width: 84px;
+  }
+
+  .mute {
+    display: inline-block;
+  }
+
   form {
     margin: 0;
     margin-top: 11px;
     margin-bottom: 12px;
-  }
-
-  input, button {
-    height: 22px;
-  }
-  input {
-    width: 75%;
-    margin-right: 2%;
-  }
-  input:focus {
-    outline: none;
-  }
-  button {
-    width: 18%;
+    input, button {
+      height: 22px;
+      margin-right: 2px;
+    }
+    input {
+      width: 55%;
+    }
+    input:focus {
+      outline: none;
+    }
+    button {
+      width: 20%;
+      color: white;
+    }
+    button.ok {
+      background-color: $green-color;
+    }
+    button.cancel {
+      background-color: $red-color;
+    }
   }
 }
-
-
 
 .small-videos {
   position: absolute;
@@ -99,12 +110,12 @@ html, body, #container{
 }
 
 .toggle-button-on {
-  background-color: $toggle-button-on-bg-color;
-  color: $toggle-button-on-color;
+  background-color: $green-color;
+  color: white;
 }
 .toggle-button-off {
-  background-color: $toggle-button-off-bg-color;
-  color: $toggle-button-off-color;
+  background-color: $red-color;
+  color: white;
 }
 
 #main-video{

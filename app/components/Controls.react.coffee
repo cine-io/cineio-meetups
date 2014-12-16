@@ -71,7 +71,6 @@ module.exports = React.createClass
       view = (<Call callback={@exitCall} />)
 
     else
-
       if @state.identity
         callButton = (<button title="Place call" onClick={@call}><i className="fa fa-3x cine-phone"></i></button>)
       else
@@ -79,17 +78,12 @@ module.exports = React.createClass
 
       view = (
         <ul>
-          <li>
-            <MediaControls />
-          </li>
-          <li>
-            {callButton}
-          </li>
-          <li>
-            <button title="Join room" onClick={@joinRoom}><i className="fa fa-3x fa-sign-in"></i></button>
-          </li>
+          <li><MediaControls /></li>
+          <li>{callButton}</li>
+          <li><button title="Join room" onClick={@joinRoom}><i className="fa fa-3x fa-sign-in"></i></button></li>
         </ul>
       )
+
     return (
       <div className="controls">
         {view}

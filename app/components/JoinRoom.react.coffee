@@ -19,11 +19,15 @@ module.exports = React.createClass
       @setState({text: event.target.value})
 
   _onSubmit: (event)->
-    event.preventDefault();
+    event.preventDefault()
     console.log("submitting")
     text = @state.text.trim()
     if text != ''
       SessionActionCreators.joinRoom(text)
+    @_done()
+
+  _onCancel: (event)->
+    event.preventDefault()
     @_done()
 
   _done: ->
@@ -35,9 +39,11 @@ module.exports = React.createClass
 
   render: ->
     return (
-      <div className="controls">
+      <div className="join-room">
         <form onSubmit={this._onSubmit}>
-          <input ref="myTextInput" type='text' onKeyDown={this._onChange}/>
+          <input ref="myTextInput" placeholder="Room name" type='text' onKeyDown={this._onChange}/>
+          <button type="submit" className="ok" onClick={@_onSubmit}>OK</button>
+          <button type="cancel" className="cancel" onClick={@_onCancel}>Cancel</button>
         </form>
       </div>
     )
