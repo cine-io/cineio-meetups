@@ -44,7 +44,7 @@ html, body, #container {
     border: 0;
     border-right: 1px solid #eee;
     padding: 0; }
-    .controls button i.fa-sign-in {
+    .controls button i.fa-sign-in, .controls button i.fa-sign-out, .controls button i.fa-user {
       height: 32px; }
   .controls button.camera-and-microphone {
     width: 84px; }

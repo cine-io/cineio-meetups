@@ -54,8 +54,10 @@ html, body, #container{
     border: 0;
     border-right: 1px solid #eee;
     padding: 0;
-    i.fa-sign-in {
-      height: 32px; // hack to make fa- and cine- font icons line up
+
+    // hack to make fa- and cine- font icons line up
+    i.fa-sign-in, i.fa-sign-out, i.fa-user {
+      height: 32px;
     }
   }
 
