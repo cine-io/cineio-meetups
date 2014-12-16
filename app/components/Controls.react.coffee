@@ -17,7 +17,7 @@ stateFromSessionStore = ->
 module.exports = React.createClass
 
   getInitialState: ->
-    return assign({identifying: false, calling: false, joiningRoom: false, callingSomebody: false}, stateFromSessionStore())
+    return assign({identifying: true, calling: false, joiningRoom: false, callingSomebody: false}, stateFromSessionStore())
 
   joinRoom: (event)->
     event.preventDefault()

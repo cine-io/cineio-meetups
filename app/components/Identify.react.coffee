@@ -13,21 +13,19 @@ module.exports = React.createClass
     return {text: ''}
 
   _onChange: (event)->
-    if event.keyCode == ESCAPE_KEY
-      @_done()
-    else
-      @setState({text: event.target.value})
+    @setState({text: event.target.value})
 
   _onSubmit: (event)->
     event.preventDefault();
-    console.log("submitting")
     text = @state.text.trim()
-    if text != ''
+    if text == ''
+      @refs.myTextInput.getDOMNode().focus()
+      @refs.myTextInput.getDOMNode().style.borderColor = "red"
+    else
       SessionActionCreators.identify(text)
-    @_done()
+      @_done()
 
   _done: ->
-    @setState(@getInitialState())
     @props.callback()
 
   componentDidMount: ->
@@ -37,7 +35,8 @@ module.exports = React.createClass
     return (
       <div className="identify">
         <form onSubmit={@_onSubmit}>
-          <input ref="myTextInput" type='text' onKeyDown={@_onChange}/>
+          <input ref="myTextInput" placeholder="Your name (required)" type='text' onKeyDown={@_onChange}/>
+          <button type="submit" onClick={@_onSubmit}>OK</button>
         </form>
       </div>
     )

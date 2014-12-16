@@ -51,6 +51,20 @@ html, body, #container {
 .controls .mute {
   display: inline-block; }
 
+.identify form {
+  margin: 0;
+  margin-top: 11px;
+  margin-bottom: 12px; }
+.identify input, .identify button {
+  height: 22px; }
+.identify input {
+  width: 75%;
+  margin-right: 2%; }
+.identify input:focus {
+  outline: none; }
+.identify button {
+  width: 18%; }
+
 .small-videos {
   position: absolute;
   bottom: 20px;
