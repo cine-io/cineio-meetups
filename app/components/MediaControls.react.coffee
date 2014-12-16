@@ -64,6 +64,31 @@ module.exports = React.createClass
     @setState(stateFromSessionStore()) if @isMounted()
 
   render: ->
+    console.log "cameraAndMicStarted: #{@state.cameraAndMicStarted}"
+    console.log "videoMuted: #{@state.videoMuted}"
+    console.log "audioMuted: #{@state.audioMuted}"
+    console.log "screenShareStarted: #{@state.screenShareStarted}"
+
+    videoButtonOnClick = if @state.videoMuted then @unmuteVideo else @muteVideo
+    videoButton = (
+      <FAToggleButton
+        onClassName="cine-video-camera"
+        offClassName="cine-video-camera-slash"
+        buttonName="Video Camera"
+        isOn={!!@state.cameraAndMicStarted and !@state.videoMuted}
+        onClick={videoButtonOnClick}/>
+    )
+
+    audioButtonOnClick = if @state.audioMuted then @unmuteAudio else @muteAudio
+    audioButton = (
+      <FAToggleButton
+        onClassName="cine-microphone"
+        offClassName="cine-microphone-slash"
+        buttonName="Microphone"
+        isOn={!!@state.cameraAndMicStarted and !@state.audioMuted}
+        onClick={audioButtonOnClick}/>
+    )
+
     screenShareButtonOnClick = if @state.screenShareStarted then @stopScreenShare else @startScreenShare
     console.log "screen share started?", @state.screenShareStarted
     screenShareButton = (
@@ -74,43 +99,6 @@ module.exports = React.createClass
         isOn={if @state.screenShareStarted then true else false}
         onClick={screenShareButtonOnClick}/>
     )
-
-    if !@state.cameraAndMicStarted
-      return (
-        <ul className="mute">
-          <li>
-            <button className="camera-and-microphone" onClick={@startCameraAndMicrophone}>
-              <i className="fa fa-3x cine-video-camera"></i>
-              &nbsp;
-              <i className="fa fa-plus"></i>
-              &nbsp;
-              <i className="fa fa-3x cine-microphone"></i>
-            </button>
-          </li>
-          <li>
-            {screenShareButton}
-          </li>
-        </ul>
-      )
-    else
-      audioButtonOnClick = if @state.audioMuted then @unmuteAudio else @muteAudio
-      audioButton = (
-        <FAToggleButton
-          onClassName="cine-microphone"
-          offClassName="cine-microphone-slash"
-          buttonName="Microphone"
-          isOn={!@state.audioMuted}
-          onClick={audioButtonOnClick}/>
-      )
-      videoButtonOnClick = if @state.videoMuted then @unmuteVideo else @muteVideo
-      videoButton = (
-        <FAToggleButton
-          onClassName="cine-video-camera"
-          offClassName="cine-video-camera-slash"
-          buttonName="Video Camera"
-          isOn={!@state.videoMuted}
-          onClick={videoButtonOnClick}/>
-      )
 
     return (
       <ul className="mute">
