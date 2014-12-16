@@ -68,7 +68,7 @@ module.exports = React.createClass
         </div>
         <div className="new-message">
           <form onSubmit={@_onSubmit}>
-            <textarea placeholder="Chat..." onKeyDown={@_onKeyDown} onChange={@_onTextChange} value={@state.text}/>
+            <textarea placeholder="Type a message ..." onKeyDown={@_onKeyDown} onChange={@_onTextChange} value={@state.text}/>
           </form>
         </div>
       </div>
