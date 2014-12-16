@@ -46,9 +46,9 @@ module.exports = React.createClass
       )
     else
       if @props.call
-        hangupButton = (<button title="Hang up" onClick={@hangup}><i className="fa fa-3x cine-hangup"></i></button>)
+        hangupButton = (<button className="cancel" title="Hang up" onClick={@hangup}><i className="fa fa-3x cine-hangup"></i></button>)
       else
-        hangupButton = (<button title="Leave room" onClick={@leaveRoom}><i className="fa fa-3x fa-sign-out"></i></button>)
+        hangupButton = (<button className="cancel" title="Leave room" onClick={@leaveRoom}><i className="fa fa-3x fa-sign-out"></i></button>)
 
       inviteButton = (<button title="Invite user" onClick={@invite}><i className="fa fa-3x fa-user"></i></button>)
 

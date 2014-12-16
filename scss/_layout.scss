@@ -48,7 +48,12 @@ html, body, #container{
     }
   }
 
+  .mute {
+    display: inline-block;
+  }
+
   button {
+    cursor: pointer;
     width: 44px;
     height: 44px;
     border: 0;
@@ -64,9 +69,13 @@ html, body, #container{
   button.camera-and-microphone {
     width: 84px;
   }
-
-  .mute {
-    display: inline-block;
+  button.ok {
+    color: white;
+    background-color: $green-color;
+  }
+  button.cancel {
+    color: white;
+    background-color: $red-color;
   }
 
   form {
@@ -85,13 +94,6 @@ html, body, #container{
     }
     button {
       width: 20%;
-      color: white;
-    }
-    button.ok {
-      background-color: $green-color;
-    }
-    button.cancel {
-      background-color: $red-color;
     }
   }
 }

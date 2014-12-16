@@ -38,7 +38,10 @@ html, body, #container {
     margin: 0; }
     .controls ul li {
       display: inline; }
+  .controls .mute {
+    display: inline-block; }
   .controls button {
+    cursor: pointer;
     width: 44px;
     height: 44px;
     border: 0;
@@ -48,8 +51,12 @@ html, body, #container {
       height: 32px; }
   .controls button.camera-and-microphone {
     width: 84px; }
-  .controls .mute {
-    display: inline-block; }
+  .controls button.ok {
+    color: white;
+    background-color: forestgreen; }
+  .controls button.cancel {
+    color: white;
+    background-color: crimson; }
   .controls form {
     margin: 0;
     margin-top: 11px;
@@ -62,12 +69,7 @@ html, body, #container {
     .controls form input:focus {
       outline: none; }
     .controls form button {
-      width: 20%;
-      color: white; }
-    .controls form button.ok {
-      background-color: forestgreen; }
-    .controls form button.cancel {
-      background-color: crimson; }
+      width: 20%; }
 
 .small-videos {
   position: absolute;

@@ -20,10 +20,10 @@ module.exports = React.createClass
     return (
       <ul className='incoming-call'>
         <li>
-          <button onClick={@answer}><i className="fa fa-3x cine-phone"></i></button>
+          <button className="ok" onClick={@answer}><i className="fa fa-3x cine-phone"></i></button>
         </li>
         <li>
-          <button onClick={@reject}><i className="fa fa-3x cine-hangup"></i></button>
+          <button className="cancel" onClick={@reject}><i className="fa fa-3x cine-hangup"></i></button>
         </li>
       </ul>
     )
