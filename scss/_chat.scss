@@ -2,58 +2,58 @@
   position: relative;
   height: 100%;
   width: 100%;
-}
 
-.chat-wrapper h4 {
-  margin-top: 0;
-  padding: 0.25em 0.5em;
-  background-color: #eee;
-  font-weight: bold;
-  font-size: 1em;
-}
-
-.chat-wrapper .messages, .chat-wrapper .new-message{
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 1;
-}
-.chat-wrapper .messages{
-  bottom: 104px;
-}
-.new-message{
-  height: 60px;
-  bottom: 44px;
-}
-.new-message form{
-  padding: 0 3px;
-}
-.new-message textarea{
-  width: 100%;
-  height: 100%;
-}
-
-.messages ul{
-  padding-left: 0;
-  li {
-    list-style-type: none;
+  h4 {
+    margin-top: 0;
+    padding: 0.25em 0.5em;
+    background-color: #eee;
+    font-weight: bold;
+    font-size: 1em;
   }
-}
 
-.message{
-  padding: 0 3px;
-  margin-bottom: 5px;
-  a {
-    word-break: break-word;
+  .messages, .new-message {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
   }
-}
 
-.message .top{
-  overflow: hidden;
-}
-.message .identity{
-  float:  left;
-}
-.message .time{
-  float:  right;
+  .messages {
+    bottom: 104px;
+    ul {
+      padding-left: 0;
+      li {
+        list-style-type: none;
+      }
+    }
+  }
+
+  .new-message {
+    height: 60px;
+    bottom: 44px;
+    form {
+      padding: 0 3px;
+    }
+    textarea {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .message {
+    padding: 0 3px;
+    margin-bottom: 5px;
+    a {
+      word-break: break-word;
+    }
+    .top {
+      overflow: hidden;
+    }
+    .identity{
+      float:  left;
+    }
+    .time {
+      float:  right;
+    }
+  }
 }
