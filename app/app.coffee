@@ -1,5 +1,5 @@
 React = require('react')
-Example = require('./components/Example.react')
+Meetups = require('./components/Meetups.react')
 
 CineAPIBridge = require('./utils/CineAPIBridge')
 ServerAPIBridge = require('./utils/ServerAPIBridge')
@@ -16,6 +16,6 @@ window.onunload = ->
   ServerAPIBridge.unidentify()
 
 React.render(
-  <Example />,
+  <Meetups />,
   document.getElementById('container')
 )

@@ -10,7 +10,7 @@ module.exports = React.createClass({
 
   render: ->
     return (
-      <div id="example">
+      <div id="meetups">
         <div id="video-chat">
           <MainVideo />
           <SmallVideos />

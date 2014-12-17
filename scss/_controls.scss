@@ -1,0 +1,74 @@
+.controls {
+  text-align: center;
+
+  ul {
+    padding-left: 0;
+    margin: 0;
+    li {
+      display: inline;
+    }
+  }
+
+  .mute {
+    display: inline-block;
+  }
+
+  button {
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-right: 1px solid #eee;
+    padding: 0;
+
+    // hack to make fa- and cine- font icons line up
+    i.fa-sign-in, i.fa-sign-out, i.fa-user {
+      height: 32px;
+    }
+  }
+
+  button.camera-and-microphone {
+    width: 84px;
+  }
+  button.ok {
+    color: white;
+    background-color: $green-color;
+  }
+  button.cancel {
+    color: white;
+    background-color: $red-color;
+  }
+
+  form {
+    margin: 0;
+    margin-top: 11px;
+    margin-bottom: 12px;
+    input, button {
+      height: 22px;
+      margin-right: 2px;
+    }
+    input {
+      width: 55%;
+    }
+    input:focus {
+      outline: none;
+    }
+    button {
+      width: 20%;
+    }
+  }
+}
+
+.ongoing-call form {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.toggle-button-on {
+  background-color: $green-color;
+  color: white;
+}
+.toggle-button-off {
+  background-color: $red-color;
+  color: white;
+}
