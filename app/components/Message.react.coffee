@@ -1,6 +1,7 @@
 # @cjsx React.DOM
 React = require('react')
 moment = require('moment')
+autolinks = require('autolinks')
 
 module.exports = React.createClass
 
@@ -21,8 +22,6 @@ module.exports = React.createClass
             {time}
           </div>
         </div>
-        <div className="body">
-          {@props.message.text}
-        </div>
+        <div className="body" dangerouslySetInnerHTML={{ __html: autolinks(@props.message.text) }} />
       </div>
     )
