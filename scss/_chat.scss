@@ -43,17 +43,47 @@
   .message {
     padding: 0 3px;
     margin-bottom: 5px;
+
     a {
       word-break: break-word;
     }
+
     .top {
       overflow: hidden;
     }
-    .identity{
-      float:  left;
+
+    .identity {
+      cursor: default;
+      float: left;
+      width: 36px;
+      height: 36px;
+      margin-right: 4px;
+      text-align: center;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 2em;
+      color: white;
     }
+
+    .body {
+      font-size: 0.9em;
+    }
+
     .time {
-      float:  right;
+      float: right;
+      background: white;
+      font-size: 0.5em;
+      color: #555;
     }
   }
 }
+
+.bg0 { background-color: black; }
+.bg1 { background-color: brown; }
+.bg2 { background-color: darkblue; }
+.bg3 { background-color: darkcyan; }
+.bg4 { background-color: darkgreen; }
+.bg5 { background-color: darkred; }
+.bg6 { background-color: darkslateblue; }
+.bg7 { background-color: indigo; }
+.bg8 { background-color: saddlebrown; }
+.bg9 { background-color: seagreen; }
