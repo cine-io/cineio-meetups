@@ -137,6 +137,8 @@ html, body, #container {
 .message {
   padding: 0 3px;
   margin-bottom: 5px; }
+  .message a {
+    word-break: break-word; }
 
 .message .top {
   overflow: hidden; }
