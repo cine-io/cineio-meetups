@@ -12,15 +12,15 @@ module.exports = React.createClass
   getInitialState: ->
     return {text: ''}
 
-  _onChange: (event)->
+  _onKeyDown: (event)->
     if event.keyCode == ESCAPE_KEY
       @_done()
-    else
-      @setState({text: event.target.value})
+
+  _onChange: (event)->
+    @setState({text: event.target.value})
 
   _onSubmit: (event)->
     event.preventDefault()
-    console.log("submitting")
     text = @state.text.trim()
     if text != ''
       SessionActionCreators.joinRoom(text)
@@ -40,8 +40,8 @@ module.exports = React.createClass
   render: ->
     return (
       <div className="join-room">
-        <form onSubmit={this._onSubmit}>
-          <input ref="myTextInput" placeholder="Room name" type='text' onKeyDown={this._onChange}/>
+        <form onSubmit={@_onSubmit}>
+          <input ref="myTextInput" placeholder="Room name" type='text' value={@state.text} onChange={@_onChange} onKeyDown={@_onKeyDown}/>
           <button type="submit" className="ok" onClick={@_onSubmit}>OK</button>
           <button type="cancel" className="cancel" onClick={@_onCancel}>Cancel</button>
         </form>
