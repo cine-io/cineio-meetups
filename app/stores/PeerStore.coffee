@@ -104,7 +104,7 @@ PeerStore.dispatchToken = AppDispatcher.register((payload) ->
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()
     when ActionTypes.OUTGOING_CALL
-      console.log("incoming call", action.call)
+      console.log("OUTGOING_CALL", action.call)
       _currentCall = action.call
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()
@@ -117,6 +117,7 @@ PeerStore.dispatchToken = AppDispatcher.register((payload) ->
       console.log("call answered", action.call)
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       stopRing()
+      PeerStore.emitChange()
     when ActionTypes.CALL_REJECT
       stopRing()
       _currentCall = null

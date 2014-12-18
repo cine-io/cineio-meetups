@@ -2,6 +2,13 @@ CineActionCreators = require('../actions/CineActionCreators')
 
 CineAPIBridge =
 
+  _handleOutgoingCall: (err, data)->
+    debugger
+    callObj = data.call
+    CineActionCreators.currentCall(callObj)
+    callObj.on 'call-reject', ->
+      CineActionCreators.callRejected(callObj)
+
   joinRoom: (name)->
     CineIOPeer.join(name)
 
@@ -15,10 +22,10 @@ CineAPIBridge =
     if options.call
       options.call.invite(identity)
     else if options.room
-      CineIOPeer.call(identity, options.room)
+      CineIOPeer.call identity, options.room, CineAPIBridge._handleOutgoingCall
     # unnecessary else, but helpful verbosity
     else
-      CineIOPeer.call(identity)
+      CineIOPeer.call identity, CineAPIBridge._handleOutgoingCall
 
   sendDataToAll: (data)->
     console.log("CineAPIBridge sendDataToAll", data)
@@ -65,15 +72,6 @@ CineAPIBridge =
     CineIOPeer.on 'call', (data)->
       console.log("NEW CALL", data)
       CineActionCreators.newCall(data.call)
-
-    CineIOPeer.on 'call-placed', (data)->
-      console.log("CURRENT CALL", data)
-      CineActionCreators.currentCall(data.call)
-
-    CineIOPeer.on 'call-reject', (data)->
-      console.log("CURRENT CALL", data)
-      CineActionCreators.callRejected(data.call)
-      # data.call.answer()
 
     CineIOPeer.on 'peer-data', (data)->
       console.log("GOT DATA CALL", data)

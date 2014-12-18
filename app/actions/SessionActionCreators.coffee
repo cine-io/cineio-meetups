@@ -35,11 +35,13 @@ SessionActionCreators =
     AppDispatcher.handleViewAction
       type: ActionTypes.CALL_ANSWER
       call: call
+    call.answer()
 
   rejectCall: (call)->
     AppDispatcher.handleViewAction
       type: ActionTypes.CALL_REJECT
       call: call
+    call.reject()
 
   callHangup: (call)->
     AppDispatcher.handleViewAction

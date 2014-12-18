@@ -12,7 +12,8 @@ PeerStore = require('../stores/PeerStore')
 SessionActionCreators = require('../actions/SessionActionCreators')
 
 stateFromSessionStore = ->
-  return {currentCall: PeerStore.getCurrentCall(), currentRoom: SessionStore.getCurrentRoom(), identity: SessionStore.getIdentity()}
+  currentCall = PeerStore.getCurrentCall()
+  return {currentCall: currentCall, currentRoom: SessionStore.getCurrentRoom(), identity: SessionStore.getIdentity(), isInCall: (currentCall && currentCall.isInCall())}
 
 module.exports = React.createClass
 
@@ -53,7 +54,7 @@ module.exports = React.createClass
 
   render: ->
     if @state.currentCall
-      if @state.currentCall.ongoing
+      if @state.isInCall
         view = (<OngoingCall call={@state.currentCall} />)
       else
         view = (<IncomingCall call={@state.currentCall} />)
