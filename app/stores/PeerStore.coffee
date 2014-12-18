@@ -127,6 +127,12 @@ PeerStore.dispatchToken = AppDispatcher.register((payload) ->
       _currentCall = null
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()
+    when ActionTypes.CALL_CANCELED
+      console.log("call canceled", action.call)
+      _currentCall = null
+      stopRing()
+      # AppDispatcher.waitFor [PeerStore.dispatchToken]
+      PeerStore.emitChange()
     when ActionTypes.PEER_LEFT
       console.log("removing Peer", action.video)
       index = _peers.indexOf action.video

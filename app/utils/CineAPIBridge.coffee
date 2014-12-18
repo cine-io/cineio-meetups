@@ -3,7 +3,6 @@ CineActionCreators = require('../actions/CineActionCreators')
 CineAPIBridge =
 
   _handleOutgoingCall: (err, data)->
-    debugger
     callObj = data.call
     CineActionCreators.currentCall(callObj)
     callObj.on 'call-reject', ->
@@ -71,7 +70,10 @@ CineAPIBridge =
 
     CineIOPeer.on 'call', (data)->
       console.log("NEW CALL", data)
-      CineActionCreators.newCall(data.call)
+      callObj = data.call
+      CineActionCreators.newCall(callObj)
+      callObj.on 'call-cancel', ->
+        CineActionCreators.callCancelled(callObj)
 
     CineIOPeer.on 'peer-data', (data)->
       console.log("GOT DATA CALL", data)

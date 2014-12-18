@@ -42,6 +42,11 @@ module.exports =
       type: ActionTypes.OUTGOING_CALL
       call: call
 
+  callCancelled: (call)->
+    AppDispatcher.handleCineAction
+      type: ActionTypes.CALL_CANCELED
+      call: call
+
   callRejected: (call)->
     AppDispatcher.handleCineAction
       type: ActionTypes.CALL_REJECTED
