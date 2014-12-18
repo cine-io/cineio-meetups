@@ -10,12 +10,18 @@ SessionActionCreators =
       type: ActionTypes.JOIN_ROOM
       room: room
     CineAPIBridge.joinRoom(room)
+    qs = "room=#{room}"
+    stateObj = {join: true, room: room}
+    window.history.pushState(stateObj, qs, "?#{qs}")
 
   leaveRoom: (room)->
     AppDispatcher.handleViewAction
       type: ActionTypes.LEAVE_ROOM
       room: room
     CineAPIBridge.leaveRoom(room)
+    path = "/"
+    stateObj = {leave: true, room: null}
+    window.history.pushState(stateObj, path, path)
 
   call: (identity)->
     AppDispatcher.handleViewAction
