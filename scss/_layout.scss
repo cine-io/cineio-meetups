@@ -18,7 +18,7 @@ html, body, #container {
   color: white;
 }
 
-#video-chat, #text-chat {
+#video-chat, #controls-and-chat {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -30,7 +30,7 @@ html, body, #container {
   right: 220px;
 }
 
-#text-chat {
+#controls-and-chat {
   width: 220px;
   right: 0;
   background: white;

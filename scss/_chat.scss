@@ -1,10 +1,17 @@
 .chat-wrapper {
   position: relative;
+  overflow: hidden;
   height: 100%;
   width: 100%;
 
   h4 {
-    margin-top: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 22px;
+    margin: 0;
+    overflow: hidden;
     padding: 0.25em 0.5em;
     background-color: #eee;
     font-weight: bold;
@@ -19,7 +26,13 @@
   }
 
   .messages {
-    bottom: 104px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    top: 30px;
+    width: 100%;
+    bottom: 108px;
+    overflow: auto;
     ul {
       padding-left: 0;
       li {
@@ -30,7 +43,8 @@
 
   .new-message {
     height: 60px;
-    bottom: 44px;
+    bottom: 46px;
+    overflow: hidden;
     form {
       padding: 0 3px;
     }

@@ -15,7 +15,7 @@ module.exports = React.createClass({
           <MainVideo />
           <SmallVideos />
         </div>
-        <div id="text-chat">
+        <div id="controls-and-chat">
           <Controls />
           <TextChat />
         </div>

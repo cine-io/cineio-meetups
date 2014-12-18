@@ -49,6 +49,8 @@ module.exports = React.createClass
         timestamp: (new Date).getTime()
       MessageActionCreators.createMessage(message)
     @setState(text: '')
+    messagesEl = @refs.messages.getDOMNode()
+    messagesEl.scrollTop = messagesEl.scrollHeight;
 
   render: ->
     messages = for message in @state.messages
@@ -61,7 +63,7 @@ module.exports = React.createClass
     return (
       <div className="chat-wrapper">
         <h4>Group Chat</h4>
-        <div className="messages">
+        <div ref="messages" className="messages">
           <ul>
             {messages}
           </ul>

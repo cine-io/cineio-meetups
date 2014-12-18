@@ -15,7 +15,7 @@ html, body, #container {
   background: black;
   color: white; }
 
-#video-chat, #text-chat {
+#video-chat, #controls-and-chat {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -25,7 +25,7 @@ html, body, #container {
   left: 0;
   right: 220px; }
 
-#text-chat {
+#controls-and-chat {
   width: 220px;
   right: 0;
   background: white;
@@ -85,10 +85,17 @@ html, body, #container {
 
 .chat-wrapper {
   position: relative;
+  overflow: hidden;
   height: 100%;
   width: 100%; }
   .chat-wrapper h4 {
-    margin-top: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 22px;
+    margin: 0;
+    overflow: hidden;
     padding: 0.25em 0.5em;
     background-color: #eee;
     font-weight: bold;
@@ -99,14 +106,21 @@ html, body, #container {
     right: 0;
     z-index: 1; }
   .chat-wrapper .messages {
-    bottom: 104px; }
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    top: 30px;
+    width: 100%;
+    bottom: 108px;
+    overflow: auto; }
     .chat-wrapper .messages ul {
       padding-left: 0; }
       .chat-wrapper .messages ul li {
         list-style-type: none; }
   .chat-wrapper .new-message {
     height: 60px;
-    bottom: 44px; }
+    bottom: 46px;
+    overflow: hidden; }
     .chat-wrapper .new-message form {
       padding: 0 3px; }
     .chat-wrapper .new-message textarea {
