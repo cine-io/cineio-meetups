@@ -26,18 +26,13 @@
   }
 
   .messages {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     top: 30px;
     width: 100%;
     bottom: 108px;
     overflow: auto;
-    ul {
-      padding-left: 0;
-      li {
-        list-style-type: none;
-      }
+    padding-left: 0;
+    li {
+      list-style-type: none;
     }
   }
 

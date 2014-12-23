@@ -106,17 +106,13 @@ html, body, #container {
     right: 0;
     z-index: 1; }
   .chat-wrapper .messages {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     top: 30px;
     width: 100%;
     bottom: 108px;
-    overflow: auto; }
-    .chat-wrapper .messages ul {
-      padding-left: 0; }
-      .chat-wrapper .messages ul li {
-        list-style-type: none; }
+    overflow: auto;
+    padding-left: 0; }
+    .chat-wrapper .messages li {
+      list-style-type: none; }
   .chat-wrapper .new-message {
     height: 60px;
     bottom: 46px;

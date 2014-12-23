@@ -25,9 +25,16 @@ module.exports = React.createClass
     MessageStore.addChangeListener(@_onChange)
     SessionStore.addChangeListener(@_onChange)
 
+  componentDidUpdate: ->
+    @_scrollMessages()
+
   componentWillUnmount: ->
     MessageStore.removeChangeListener(@_onChange)
     SessionStore.removeChangeListener(@_onChange)
+
+  _scrollMessages: ->
+    messagesEl = @refs.messages.getDOMNode();
+    messagesEl.scrollTop = messagesEl.scrollHeight;
 
   _onChange: (event)->
     @setState(getStateFromStores())
@@ -49,8 +56,6 @@ module.exports = React.createClass
         timestamp: (new Date).getTime()
       MessageActionCreators.createMessage(message)
     @setState(text: '')
-    messagesEl = @refs.messages.getDOMNode()
-    messagesEl.scrollTop = messagesEl.scrollHeight;
 
   render: ->
     messages = for message in @state.messages
@@ -63,11 +68,9 @@ module.exports = React.createClass
     return (
       <div className="chat-wrapper">
         <h4>Group Chat</h4>
-        <div ref="messages" className="messages">
-          <ul>
+        <ul ref="messages" className="messages">
             {messages}
-          </ul>
-        </div>
+        </ul>
         <div className="new-message">
           <form onSubmit={@_onSubmit}>
             <textarea placeholder="Type a message ..." onKeyDown={@_onKeyDown} onChange={@_onTextChange} value={@state.text}/>
