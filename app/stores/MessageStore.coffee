@@ -7,7 +7,12 @@ MainConstants = require("../constants/MainConstants")
 ActionTypes = MainConstants.ActionTypes
 CHANGE_EVENT = "change"
 
-_messages = []
+_messages = null
+
+reset = ->
+  _messages = []
+
+reset()
 
 MessageStore = assign {}, EventEmitter::,
   emitChange: ->
@@ -38,6 +43,10 @@ MessageStore.dispatchToken = AppDispatcher.register((payload) ->
       action.message.identity ||= 'Me'
       _messages.push action.message
       # AppDispatcher.waitFor [MessageStore.dispatchToken]
+      MessageStore.emitChange()
+    when ActionTypes.LEAVE_ROOM, ActionTypes.CALL_HANGUP
+      console.log("LEAVE_ROOM", action.message)
+      reset()
       MessageStore.emitChange()
     else
 )
