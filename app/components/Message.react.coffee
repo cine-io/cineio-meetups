@@ -1,7 +1,7 @@
 # @cjsx React.DOM
 React = require('react')
 moment = require('moment')
-autolinks = require('autolinks')
+autolink = require('../utils/autolink')
 
 module.exports = React.createClass
 
@@ -19,6 +19,7 @@ module.exports = React.createClass
     d = new Date(@props.message.timestamp)
 
     time = moment(d).format('h:mm A')
+    messageBody = autolink(@props.message.text, target: "_blank")
     return (
       <div className="message">
         <div className="top">
@@ -28,7 +29,7 @@ module.exports = React.createClass
           <div className="time">
             {time}
           </div>
-          <div className="body" dangerouslySetInnerHTML={{ __html: autolinks(@props.message.text) }} />
+          <div className="body" dangerouslySetInnerHTML={{ __html: messageBody}} />
         </div>
       </div>
     )
