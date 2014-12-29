@@ -27,6 +27,7 @@ module.exports = React.createClass
 
   componentDidUpdate: ->
     @_scrollMessages()
+    @refs.messageBox.getDOMNode().focus()
 
   componentWillUnmount: ->
     MessageStore.removeChangeListener(@_onChange)
@@ -58,6 +59,8 @@ module.exports = React.createClass
     @setState(text: '')
 
   render: ->
+    console.log "@state.identity:", @state.identity
+    console.log "readOnly:", !!@state.identity
     messages = for message in @state.messages
       key = "#{message.text}:#{message.timestamp}"
       (
@@ -73,7 +76,7 @@ module.exports = React.createClass
         </ul>
         <div className="new-message">
           <form onSubmit={@_onSubmit}>
-            <textarea placeholder="Type a message ..." onKeyDown={@_onKeyDown} onChange={@_onTextChange} value={@state.text}/>
+            <textarea ref="messageBox" placeholder="Type a message ..." onKeyDown={@_onKeyDown} onChange={@_onTextChange} value={@state.text} disabled={!@state.identity} />
           </form>
         </div>
       </div>

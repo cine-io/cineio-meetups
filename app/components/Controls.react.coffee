@@ -59,14 +59,14 @@ module.exports = React.createClass
       else
         view = (<IncomingCall call={@state.currentCall} />)
 
+    else if @state.identifying
+      view = (<Identify callback={@exitIdentify} />)
+
     else if @state.currentRoom
       view = (<OngoingCall room={@state.currentRoom} />)
 
     else if @state.joiningRoom
       view = (<JoinRoom callback={@exitJoinRoom} />)
-
-    else if @state.identifying
-      view = (<Identify callback={@exitIdentify} />)
 
     else if @state.calling
       view = (<Call callback={@exitCall} />)
