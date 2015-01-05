@@ -5,7 +5,9 @@
   "version": "0.0.1",
   "description": "Hangouts Clone using Cine.io Peer SDK",
   "main": "server.js",
-  "scripts": {},
+  "scripts": {
+    "test": "true"
+    },
   "repository": "",
   "dependencies": {
     "coffee-script": "^1.8.0",
