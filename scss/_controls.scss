@@ -4,6 +4,7 @@
   ul {
     padding-left: 0;
     margin: 0;
+    padding-top: 0;
     li {
       display: inline;
     }
@@ -15,16 +16,27 @@
 
   button {
     cursor: pointer;
+    vertical-align: top;
     width: 44px;
     height: 44px;
     border: 0;
     border-right: 1px solid #eee;
     padding: 0;
+    background-color: #c0c0c0;
 
     // hack to make fa- and cine- font icons line up
     i.fa-sign-in, i.fa-sign-out, i.fa-user {
-      height: 32px;
+      height: 33px;
     }
+  }
+
+ button.toggle-button-on {
+    background-color: $green-color;
+    color: white;
+  }
+  button.toggle-button-off {
+    background-color: $red-color;
+    color: white;
   }
 
   button.camera-and-microphone {
@@ -62,13 +74,4 @@
 .ongoing-call form {
   display: inline-block;
   padding: 0 10px;
-}
-
-.toggle-button-on {
-  background-color: $green-color;
-  color: white;
-}
-.toggle-button-off {
-  background-color: $red-color;
-  color: white;
 }

@@ -35,20 +35,29 @@ html, body, #container {
   text-align: center; }
   .controls ul {
     padding-left: 0;
-    margin: 0; }
+    margin: 0;
+    padding-top: 0; }
     .controls ul li {
       display: inline; }
   .controls .mute {
     display: inline-block; }
   .controls button {
     cursor: pointer;
+    vertical-align: top;
     width: 44px;
     height: 44px;
     border: 0;
     border-right: 1px solid #eee;
-    padding: 0; }
+    padding: 0;
+    background-color: #c0c0c0; }
     .controls button i.fa-sign-in, .controls button i.fa-sign-out, .controls button i.fa-user {
-      height: 32px; }
+      height: 33px; }
+  .controls button.toggle-button-on {
+    background-color: forestgreen;
+    color: white; }
+  .controls button.toggle-button-off {
+    background-color: crimson;
+    color: white; }
   .controls button.camera-and-microphone {
     width: 84px; }
   .controls button.ok {
@@ -74,14 +83,6 @@ html, body, #container {
 .ongoing-call form {
   display: inline-block;
   padding: 0 10px; }
-
-.toggle-button-on {
-  background-color: forestgreen;
-  color: white; }
-
-.toggle-button-off {
-  background-color: crimson;
-  color: white; }
 
 .chat-wrapper {
   position: relative;
