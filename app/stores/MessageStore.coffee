@@ -30,6 +30,10 @@ MessageStore = assign {}, EventEmitter::,
   getMessages: ->
     _messages.slice(0) #clone
 
+  clearMessages: ->
+    reset()
+    @emitChange()
+
 MessageStore.dispatchToken = AppDispatcher.register((payload) ->
   action = payload.action
   switch action.type
@@ -44,7 +48,7 @@ MessageStore.dispatchToken = AppDispatcher.register((payload) ->
       _messages.push action.message
       # AppDispatcher.waitFor [MessageStore.dispatchToken]
       MessageStore.emitChange()
-    when ActionTypes.LEAVE_ROOM, ActionTypes.CALL_HANGUP
+    when ActionTypes.LEAVE_ROOM, ActionTypes.CALL_HANGUP, ActionTypes.CALL_CANCELED
       console.log("LEAVE_ROOM", action.message)
       reset()
       MessageStore.emitChange()

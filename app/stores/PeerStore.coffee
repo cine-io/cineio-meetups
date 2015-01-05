@@ -3,6 +3,7 @@ EventEmitter = require("events").EventEmitter
 
 AppDispatcher = require("../dispatcher/AppDispatcher")
 MainConstants = require("../constants/MainConstants")
+MessageStore = require("./MessageStore")
 {Howl} = require('howler')
 CHANGE_EVENT = "change"
 
@@ -23,7 +24,7 @@ startRing = ->
     loop: true
 
 stopRing = ->
-  _ringer.stop()
+  _ringer.stop() if _ringer
   _ringer = null
 
 PeerStore = assign {}, EventEmitter::,
@@ -142,6 +143,7 @@ PeerStore.dispatchToken = AppDispatcher.register((payload) ->
       # _peers.push action.video
       # AppDispatcher.waitFor [PeerStore.dispatchToken]
       PeerStore.emitChange()
+      MessageStore.clearMessages()
     else
 )
 
