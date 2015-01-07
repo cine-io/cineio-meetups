@@ -31,6 +31,7 @@ module.exports =
     SELECT_VIDEO: null
     CREATE_MESSAGE: null
     NEW_MESSAGE: null
+    INSTALL_EXTENSION: null
   PayloadSources: keyMirror
     CINE_ACTION: null
     SERVER_ACTION: null

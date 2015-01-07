@@ -27,6 +27,12 @@ module.exports =
       type: ActionTypes.LOCAL_SCREEN_SHARE_REMOVED
       video: video
 
+  showInstallExtension: (url, type)->
+    AppDispatcher.handleCineAction
+      type: ActionTypes.INSTALL_EXTENSION
+      url: url
+      extensionType: type
+
   newPeer: (video)->
     AppDispatcher.handleCineAction
       type: ActionTypes.NEW_PEER

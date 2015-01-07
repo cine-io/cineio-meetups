@@ -52,6 +52,11 @@ MessageStore.dispatchToken = AppDispatcher.register((payload) ->
       console.log("LEAVE_ROOM", action.message)
       reset()
       MessageStore.emitChange()
+    when ActionTypes.INSTALL_EXTENSION
+      console.log("INSTALL_EXTENSION")
+      message = {identity: 'system', timestamp: new Date, text: "Please install the #{action.extensionType} extension to share your screen: #{action.url}."}
+      _messages.push(message)
+      MessageStore.emitChange()
     else
 )
 

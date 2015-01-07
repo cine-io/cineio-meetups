@@ -50,7 +50,6 @@ if process.env.NODE_ENV == 'production'
     res.redirect("https://" + host + req.url)
   app.use forceHttps
 
-
 if secretKey
   app.get '', (req, res)->
     res.render('index', publicKey: publicKey)

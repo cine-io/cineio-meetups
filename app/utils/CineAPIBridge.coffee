@@ -62,6 +62,9 @@ CineAPIBridge =
     CineIOPeer.on 'media-rejected', (data)->
       alert('Permission denied.')
 
+    CineIOPeer.on 'extension-required', (data)->
+      CineActionCreators.showInstallExtension(data.url, data.type)
+
     CineIOPeer.on 'error', (err)->
       if (typeof(err.support) != "undefined" && !err.support)
         alert("This browser does not support WebRTC.")
