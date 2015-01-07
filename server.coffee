@@ -41,6 +41,16 @@ app.set('view engine', 'jade')
 
 allIdentities = {}
 
+
+if process.env.NODE_ENV == 'production'
+  forceHttps = (req, res, next) ->
+    isHttps = req.headers["x-forwarded-proto"] == 'https'
+    return next() if isHttps
+    host = req.headers.host
+    res.redirect("https://" + host + req.url)
+  app.use forceHttps
+
+
 if secretKey
   app.get '', (req, res)->
     res.render('index', publicKey: publicKey)
