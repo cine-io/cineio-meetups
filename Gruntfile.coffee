@@ -1,7 +1,3 @@
-_ = require("lodash")
-
-browserifyClientOpts =
-
 module.exports = (grunt) ->
   grunt.initConfig
     browserify:
