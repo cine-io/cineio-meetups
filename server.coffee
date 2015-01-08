@@ -1,7 +1,6 @@
 http = require("http")
 express = require("express")
 morgan = require('morgan')
-_ = require('lodash')
 CineIO = require('cine-io')
 port = process.env.PORT or 9090
 
@@ -36,7 +35,7 @@ if secretKey
     res.status(200).end()
 
   app.get '/lobby', (req, res)->
-    res.send identities: _.keys(allIdentities)
+    res.send identities: Object.keys(allIdentities)
 
 else
   app.get '', (req, res)->
