@@ -1,3 +1,6 @@
+https = require("https")
+fs = require("fs")
+
 module.exports = (app)->
   sslCertsPath = process.env.SSL_CERTS_PATH or __dirname
   sslCertFile = "localhost-cine-io.crt"

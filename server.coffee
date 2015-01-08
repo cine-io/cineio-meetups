@@ -1,6 +1,4 @@
-https = require("https")
 http = require("http")
-fs = require("fs")
 path = require('path')
 express = require("express")
 morgan = require('morgan')
@@ -69,7 +67,8 @@ app.use express.static(__dirname + "/public")
 httpServer.listen port, ->
   console.log "HTTP server started at http://localhost.cine.io:#{port}"
 
-if process.env.SSL_PORT
+
+if sslPort = process.env.SSL_PORT
   httpsServer = require('./create_cine_https_server')(app)
-  httpsServer.listen process.env.SSL_PORT, ->
+  httpsServer.listen sslPort, ->
     console.log "HTTPS server started at https://localhost.cine.io:#{sslPort}"
