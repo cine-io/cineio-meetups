@@ -6,6 +6,8 @@ newrelic_agent.log
 node_modules
 npm-debug.log
 
+ignored/
+
 .compiled
 .floo
 .flooignore
