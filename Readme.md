@@ -6,8 +6,8 @@ video/audio/text chat using rooms and peer-to-peer calling.
 ## Demo
 
 We have this exact app up and running on [https://meetups.cine.io/][meetups].
-Please note that the demo requires a compatible browser (Firefox > 34.0 /
-Chrome > 38.0). Also note that if you are using Chrome and want to use the
+Please note that the demo requires a compatible browser (Tested on Firefox > 34.0 /
+Chrome > 38.0, Opera > 24.0). Also note that if you are using Chrome and want to use the
 screen-sharing functionality, you should install the
 [cine.io Screen Sharing extension][chrome-extension].
 
