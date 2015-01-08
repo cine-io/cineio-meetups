@@ -1,5 +1,4 @@
 http = require("http")
-path = require('path')
 express = require("express")
 morgan = require('morgan')
 _ = require('lodash')
@@ -19,16 +18,9 @@ httpServer = http.createServer(app)
 
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
+require('./force_https')(app) if process.env.NODE_ENV == 'production'
 
 allIdentities = {}
-
-if process.env.NODE_ENV == 'production'
-  forceHttps = (req, res, next) ->
-    isHttps = req.headers["x-forwarded-proto"] == 'https'
-    return next() if isHttps
-    host = req.headers.host
-    res.redirect("https://" + host + req.url)
-  app.use forceHttps
 
 if secretKey
   app.get '', (req, res)->
@@ -50,23 +42,13 @@ else
   app.get '', (req, res)->
     res.render('not_configured', {title: 'Not Configured'})
 
-if process.env.NODE_ENV == 'development'
-  browserify  = require("connect-browserify")
-  nodejsx     = require("node-cjsx").transform()
-  app.get "/js/bundle.js", browserify(
-    entry: path.join(__dirname, "app/app.coffee")
-    debug: true
-    watch: true
-    transforms: ["coffee-reactify"]
-    extensions: [".cjsx", ".coffee", ".js", ".json"]
-  )
+require('./on_demand_browserify')(app) if process.env.NODE_ENV == 'development'
 
 # serve static files
 app.use express.static(__dirname + "/public")
 
 httpServer.listen port, ->
   console.log "HTTP server started at http://localhost.cine.io:#{port}"
-
 
 if sslPort = process.env.SSL_PORT
   httpsServer = require('./create_cine_https_server')(app)
