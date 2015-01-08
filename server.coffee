@@ -5,42 +5,24 @@ path = require('path')
 express = require("express")
 morgan = require('morgan')
 _ = require('lodash')
+CineIO = require('cine-io')
 port = process.env.PORT or 9090
 
 # CINE IO API KEYS
-generateSecureIdentity = require('./generate_secure_identity')
+
 keys = require('./fetch_api_keys_from_environment')()
 publicKey = keys.publicKey
 secretKey = keys.secretKey
+cineIoClient = CineIO.init({secretKey: secretKey})
 
 app = express()
 app.use morgan("dev")
 httpServer = http.createServer(app)
 
-if process.env.SSL_PORT
-  sslPort = process.env.SSL_PORT or 9443
-  sslCertsPath = process.env.SSL_CERTS_PATH or __dirname
-  sslCertFile = "localhost-cine-io.crt"
-  sslKeyFile = "localhost-cine-io.key"
-  sslIntermediateCertFiles = [ "COMODORSADomainValidationSecureServerCA.crt", "COMODORSAAddTrustCA.crt", "AddTrustExternalCARoot.crt" ]
-  sslKey = fs.readFileSync("#{sslCertsPath}/#{sslKeyFile}")
-  sslCert = fs.readFileSync("#{sslCertsPath}/#{sslCertFile}")
-  sslCA = (fs.readFileSync "#{sslCertsPath}/#{file}" for file in sslIntermediateCertFiles)
-  options =
-    ca: sslCA
-    cert: sslCert
-    key: sslKey
-    requestCert: true
-    rejectUnauthorized: false
-    agent: false
-
-  httpsServer = https.createServer(options, app)
-
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
 
 allIdentities = {}
-
 
 if process.env.NODE_ENV == 'production'
   forceHttps = (req, res, next) ->
@@ -57,7 +39,7 @@ if secretKey
   app.get '/identity/:identity', (req, res)->
     identity = req.param('identity')
     allIdentities[identity] = true
-    res.send generateSecureIdentity(identity, secretKey)
+    res.send cineIoClient.peer.generateIdentitySignature(identity)
 
   app.get '/unidentify/:identity', (req, res)->
     delete allIdentities[req.param('identity')]
@@ -84,10 +66,10 @@ if process.env.NODE_ENV == 'development'
 # serve static files
 app.use express.static(__dirname + "/public")
 
-
 httpServer.listen port, ->
   console.log "HTTP server started at http://localhost.cine.io:#{port}"
 
 if process.env.SSL_PORT
-  httpsServer.listen sslPort, ->
+  httpsServer = require('./create_cine_https_server')(app)
+  httpsServer.listen process.env.SSL_PORT, ->
     console.log "HTTPS server started at https://localhost.cine.io:#{sslPort}"
